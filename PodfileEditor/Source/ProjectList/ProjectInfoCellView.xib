@@ -39,6 +39,9 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="delete:" target="c22-O7-iKe" id="chU-yE-Jlm"/>
+                    </connections>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="G17-cm-Fe4">
                     <rect key="frame" x="380" y="35" width="30" height="30"/>
@@ -50,6 +53,9 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="edit:" target="c22-O7-iKe" id="Q9q-Th-7LN"/>
+                    </connections>
                 </button>
             </subviews>
             <constraints>

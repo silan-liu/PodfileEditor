@@ -32,14 +32,19 @@ class ProjectListViewController: NSViewController, NSTableViewDelegate, NSTableV
         }
     }
     
-    // MARK:click
+    // MARK:Action
+    @IBAction func addProject(_ sender: Any) {
+        if let vc = UIFactory.addProjectViewController() {
+            self.presentViewControllerAsSheet(vc)
+        }
+    }
+    
     @objc func doubleClickRow() {
         let row = tableView.clickedRow
         
         NSLog("double click row, %d", row)
 
-        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
-        projectDetailWindowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue:projectDetailWindowControllerName)) as? ProjectDetailWindowController
+        projectDetailWindowController = UIFactory.projectDetailWindowController()
         projectDetailWindowController?.showWindow(nil)
     }
 

@@ -685,7 +685,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="PodfileEditor" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="PodfileEditor" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA" customClass="HomeWindow" customModule="PodfileEditor" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="613" height="316"/>
@@ -702,11 +702,134 @@
             </objects>
             <point key="canvasLocation" x="68.5" y="147"/>
         </scene>
+        <!--Add Project View Controller-->
+        <scene sceneID="E6a-3j-M6K">
+            <objects>
+                <viewController storyboardIdentifier="AddProjectViewController" id="NPR-nG-Wwi" customClass="AddProjectViewController" customModule="PodfileEditor" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="wYB-ti-O6X">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="238"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3QX-am-TS1">
+                                <rect key="frame" x="20" y="201" width="86" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Project Name" id="YSE-EE-SRQ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="azA-Pg-NaB">
+                                <rect key="frame" x="20" y="123" width="80" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="PodFile Path" id="fcQ-WZ-lJh">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h0F-6O-SvQ">
+                                <rect key="frame" x="22" y="171" width="328" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="HYJ-mg-D1J">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PQL-r2-qxv">
+                                <rect key="frame" x="22" y="93" width="328" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="wzU-1c-6tF">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wmT-Fu-aae">
+                                <rect key="frame" x="333" y="21" width="82" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="gWA-ae-xgl"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hLC-u4-TkL">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="confirmAction:" target="NPR-nG-Wwi" id="W2w-Io-2c0"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pE4-rO-Ddv">
+                                <rect key="frame" x="223" y="21" width="82" height="32"/>
+                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PZa-oM-6rV">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="cancleAction:" target="NPR-nG-Wwi" id="a4z-Wh-rI4"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iCE-bx-xca">
+                                <rect key="frame" x="358" y="87" width="87" height="32"/>
+                                <buttonCell key="cell" type="push" title="Choose" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2Qg-jd-6fe">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="choosePodFilePath:" target="NPR-nG-Wwi" id="4lK-vE-onQ"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0nb-rM-U0o">
+                                <rect key="frame" x="20" y="60" width="421" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="f7j-Nj-ak8">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" red="0.98823529409999999" green="0.18611688651695391" blue="0.23562740952496961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="iCE-bx-xca" firstAttribute="centerY" secondItem="PQL-r2-qxv" secondAttribute="centerY" id="0EJ-Xl-C6J"/>
+                            <constraint firstAttribute="trailing" secondItem="PQL-r2-qxv" secondAttribute="trailing" constant="100" id="6r5-lj-FIJ"/>
+                            <constraint firstAttribute="trailing" secondItem="iCE-bx-xca" secondAttribute="trailing" constant="11" id="9t7-1R-V2S"/>
+                            <constraint firstItem="h0F-6O-SvQ" firstAttribute="leading" secondItem="3QX-am-TS1" secondAttribute="leading" id="A2d-Ag-C9f"/>
+                            <constraint firstAttribute="trailing" secondItem="wmT-Fu-aae" secondAttribute="trailing" constant="41" id="EnQ-tY-pRm"/>
+                            <constraint firstItem="azA-Pg-NaB" firstAttribute="leading" secondItem="3QX-am-TS1" secondAttribute="leading" id="F6i-7q-j8d"/>
+                            <constraint firstItem="iCE-bx-xca" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wYB-ti-O6X" secondAttribute="leading" constant="20" symbolic="YES" id="I8o-7R-mnW"/>
+                            <constraint firstItem="PQL-r2-qxv" firstAttribute="top" secondItem="azA-Pg-NaB" secondAttribute="bottom" constant="8" id="JdK-5F-etn"/>
+                            <constraint firstItem="pE4-rO-Ddv" firstAttribute="centerY" secondItem="wmT-Fu-aae" secondAttribute="centerY" id="NWm-qO-7wk"/>
+                            <constraint firstItem="wmT-Fu-aae" firstAttribute="leading" secondItem="pE4-rO-Ddv" secondAttribute="trailing" constant="40" id="OHr-6B-ic3"/>
+                            <constraint firstItem="0nb-rM-U0o" firstAttribute="top" secondItem="PQL-r2-qxv" secondAttribute="bottom" constant="16" id="UEn-By-4ww"/>
+                            <constraint firstItem="azA-Pg-NaB" firstAttribute="top" secondItem="h0F-6O-SvQ" secondAttribute="bottom" constant="31" id="XRZ-Pq-V1V"/>
+                            <constraint firstItem="0nb-rM-U0o" firstAttribute="leading" secondItem="wYB-ti-O6X" secondAttribute="leading" constant="22" id="YUr-im-bak"/>
+                            <constraint firstAttribute="trailing" secondItem="0nb-rM-U0o" secondAttribute="trailing" constant="11" id="Zlo-XW-BmK"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="azA-Pg-NaB" secondAttribute="trailing" constant="20" symbolic="YES" id="h8N-8S-d5O"/>
+                            <constraint firstItem="h0F-6O-SvQ" firstAttribute="top" secondItem="3QX-am-TS1" secondAttribute="bottom" constant="8" id="iFC-Jb-KTH"/>
+                            <constraint firstItem="3QX-am-TS1" firstAttribute="top" secondItem="wYB-ti-O6X" secondAttribute="top" constant="20" id="ifw-9C-FaC"/>
+                            <constraint firstAttribute="bottom" secondItem="wmT-Fu-aae" secondAttribute="bottom" constant="28" id="niI-GF-sr6"/>
+                            <constraint firstItem="PQL-r2-qxv" firstAttribute="leading" secondItem="azA-Pg-NaB" secondAttribute="leading" id="nrv-qq-rIu"/>
+                            <constraint firstItem="3QX-am-TS1" firstAttribute="leading" secondItem="wYB-ti-O6X" secondAttribute="leading" constant="22" id="q1A-qf-7E8"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3QX-am-TS1" secondAttribute="trailing" constant="20" symbolic="YES" id="t14-R7-E6v"/>
+                            <constraint firstAttribute="trailing" secondItem="h0F-6O-SvQ" secondAttribute="trailing" constant="100" id="vaj-Y7-4vj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="errorLabel" destination="0nb-rM-U0o" id="afR-ya-8IP"/>
+                        <outlet property="pathTextField" destination="PQL-r2-qxv" id="Cc3-uF-VU0"/>
+                        <outlet property="projectNameTextField" destination="h0F-6O-SvQ" id="9EQ-Mp-iej"/>
+                    </connections>
+                </viewController>
+                <customObject id="rgV-8n-eun" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-13" y="1146"/>
+        </scene>
         <!--Window Controller-->
         <scene sceneID="2cq-Kn-A36">
             <objects>
                 <windowController storyboardIdentifier="ProjectDetailWindowController" id="WSi-xl-5rf" customClass="ProjectDetailWindowController" customModule="PodfileEditor" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="uI2-mW-nN8">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="uI2-mW-nN8" customClass="ProjectDetailWindow" customModule="PodfileEditor" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="294" y="313" width="480" height="270"/>
@@ -728,13 +851,13 @@
             <objects>
                 <viewController id="eaV-Sa-27M" customClass="ProjectDetailViewController" customModule="PodfileEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="qzl-IL-CcL">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </view>
                 </viewController>
                 <customObject id="WVo-9l-9q1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1484" y="577"/>
+            <point key="canvasLocation" x="1604" y="664.5"/>
         </scene>
         <!--Project List View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -826,6 +949,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="addProject:" target="XfG-lQ-9wD" id="oFL-1x-3Kp"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>

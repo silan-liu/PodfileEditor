@@ -9,4 +9,11 @@
 import Cocoa
 
 class ProjectInfoCellView: NSTableCellView {
+    @IBAction func edit(_ sender: Any) {
+        NSLog("edit")
+    }
+    
+    @IBAction func delete(_ sender: Any) {
+        NSLog("delete")
+    }
 }
