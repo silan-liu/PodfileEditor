@@ -9,18 +9,22 @@
 /* Begin PBXBuildFile section */
 		ADE1F17A206CCE6A007D89AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1F179206CCE6A007D89AA /* AppDelegate.swift */; };
 		ADE1F17C206CCE6A007D89AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1F17B206CCE6A007D89AA /* ViewController.swift */; };
-		ADE1F17E206CCE6A007D89AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADE1F17D206CCE6A007D89AA /* Assets.xcassets */; };
 		ADE1F181206CCE6A007D89AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADE1F17F206CCE6A007D89AA /* Main.storyboard */; };
+		ADE1F18A206CD7AF007D89AA /* ProjectInfoCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1F189206CD7AF007D89AA /* ProjectInfoCellView.swift */; };
+		ADE1F18C206CD7C5007D89AA /* ProjectInfoCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADE1F18B206CD7C5007D89AA /* ProjectInfoCellView.xib */; };
+		ADE1F18E206CDE52007D89AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADE1F18D206CDE52007D89AA /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		ADE1F176206CCE6A007D89AA /* PodfileEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodfileEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE1F179206CCE6A007D89AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADE1F17B206CCE6A007D89AA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		ADE1F17D206CCE6A007D89AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ADE1F180206CCE6A007D89AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ADE1F182206CCE6A007D89AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADE1F183206CCE6A007D89AA /* PodfileEditor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PodfileEditor.entitlements; sourceTree = "<group>"; };
+		ADE1F189206CD7AF007D89AA /* ProjectInfoCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfoCellView.swift; sourceTree = "<group>"; };
+		ADE1F18B206CD7C5007D89AA /* ProjectInfoCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectInfoCellView.xib; sourceTree = "<group>"; };
+		ADE1F18D206CDE52007D89AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,10 +59,12 @@
 			children = (
 				ADE1F179206CCE6A007D89AA /* AppDelegate.swift */,
 				ADE1F17B206CCE6A007D89AA /* ViewController.swift */,
-				ADE1F17D206CCE6A007D89AA /* Assets.xcassets */,
+				ADE1F18D206CDE52007D89AA /* Assets.xcassets */,
 				ADE1F17F206CCE6A007D89AA /* Main.storyboard */,
 				ADE1F182206CCE6A007D89AA /* Info.plist */,
 				ADE1F183206CCE6A007D89AA /* PodfileEditor.entitlements */,
+				ADE1F189206CD7AF007D89AA /* ProjectInfoCellView.swift */,
+				ADE1F18B206CD7C5007D89AA /* ProjectInfoCellView.xib */,
 			);
 			path = PodfileEditor;
 			sourceTree = "<group>";
@@ -122,7 +128,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADE1F17E206CCE6A007D89AA /* Assets.xcassets in Resources */,
+				ADE1F18C206CD7C5007D89AA /* ProjectInfoCellView.xib in Resources */,
+				ADE1F18E206CDE52007D89AA /* Assets.xcassets in Resources */,
 				ADE1F181206CCE6A007D89AA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADE1F17C206CCE6A007D89AA /* ViewController.swift in Sources */,
+				ADE1F18A206CD7AF007D89AA /* ProjectInfoCellView.swift in Sources */,
 				ADE1F17A206CCE6A007D89AA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
