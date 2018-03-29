@@ -10,11 +10,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe" customClass="ProjectInfoCellView" customModule="PodfileEditor" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="102"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pnb-uC-u1V">
-                    <rect key="frame" x="8" y="61" width="105" height="21"/>
+                    <rect key="frame" x="8" y="59" width="105" height="21"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="project name" id="Wze-Nv-pkX">
                         <font key="font" metaFont="system" size="17"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -22,7 +22,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PHN-Tz-DVG">
-                    <rect key="frame" x="8" y="25" width="77" height="17"/>
+                    <rect key="frame" x="8" y="23" width="77" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="podfile path" id="hP7-5V-Z6L">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -30,7 +30,7 @@
                     </textFieldCell>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="YfC-x5-SUq">
-                    <rect key="frame" x="430" y="36" width="30" height="30"/>
+                    <rect key="frame" x="430" y="35" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="NEd-eq-mvC"/>
                         <constraint firstAttribute="width" constant="30" id="ouY-CG-93H"/>
@@ -41,7 +41,7 @@
                     </buttonCell>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="G17-cm-Fe4">
-                    <rect key="frame" x="380" y="36" width="30" height="30"/>
+                    <rect key="frame" x="380" y="35" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="UUR-8J-aj0"/>
                         <constraint firstAttribute="width" constant="30" id="fiK-Xd-iqF"/>
