@@ -27,4 +27,8 @@ class UIFactory: NSObject {
 
         return storyboard
     }
+    
+    static func editProjectViewController() -> EditProjectViewController {
+        return EditProjectViewController()
+    }
 }

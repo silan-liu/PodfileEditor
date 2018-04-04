@@ -14,7 +14,7 @@ class AddProjectViewController: NSViewController {
     @IBOutlet weak var projectNameTextField: NSTextField!
     
     typealias CompletionBlock = (String, String) -> (Void)
-    var chooseCompletion: CompletionBlock?
+    public var chooseCompletion: CompletionBlock?
     
     private let openPanel: NSOpenPanel = {
         let openPanel = NSOpenPanel()

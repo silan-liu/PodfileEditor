@@ -13,6 +13,7 @@
 		AD4E755D2074FE4D00205D4C /* ProjectInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E755C2074FE4D00205D4C /* ProjectInfo.swift */; };
 		AD4E755F2074FE8300205D4C /* ProjectListDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E755E2074FE8300205D4C /* ProjectListDataController.swift */; };
 		AD4E75612075006300205D4C /* ProjectInfoCellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E75602075006300205D4C /* ProjectInfoCellConfigurator.swift */; };
+		AD4E756520750ECB00205D4C /* EditProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E756420750ECB00205D4C /* EditProjectViewController.swift */; };
 		ADE1F17A206CCE6A007D89AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1F179206CCE6A007D89AA /* AppDelegate.swift */; };
 		ADE1F17C206CCE6A007D89AA /* ProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1F17B206CCE6A007D89AA /* ProjectListViewController.swift */; };
 		ADE1F181206CCE6A007D89AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADE1F17F206CCE6A007D89AA /* Main.storyboard */; };
@@ -30,12 +31,13 @@
 		AD4E755C2074FE4D00205D4C /* ProjectInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfo.swift; sourceTree = "<group>"; };
 		AD4E755E2074FE8300205D4C /* ProjectListDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListDataController.swift; sourceTree = "<group>"; };
 		AD4E75602075006300205D4C /* ProjectInfoCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfoCellConfigurator.swift; sourceTree = "<group>"; };
+		AD4E756220750BB100205D4C /* PodfileEditor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PodfileEditor.entitlements; sourceTree = "<group>"; };
+		AD4E756420750ECB00205D4C /* EditProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectViewController.swift; sourceTree = "<group>"; };
 		ADE1F176206CCE6A007D89AA /* PodfileEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodfileEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE1F179206CCE6A007D89AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADE1F17B206CCE6A007D89AA /* ProjectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewController.swift; sourceTree = "<group>"; };
 		ADE1F180206CCE6A007D89AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ADE1F182206CCE6A007D89AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ADE1F183206CCE6A007D89AA /* PodfileEditor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PodfileEditor.entitlements; sourceTree = "<group>"; };
 		ADE1F189206CD7AF007D89AA /* ProjectInfoCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfoCellView.swift; sourceTree = "<group>"; };
 		ADE1F18B206CD7C5007D89AA /* ProjectInfoCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectInfoCellView.xib; sourceTree = "<group>"; };
 		ADE1F18D206CDE52007D89AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				AD4E755C2074FE4D00205D4C /* ProjectInfo.swift */,
 				AD4E755E2074FE8300205D4C /* ProjectListDataController.swift */,
 				AD4E75602075006300205D4C /* ProjectInfoCellConfigurator.swift */,
+				AD4E756420750ECB00205D4C /* EditProjectViewController.swift */,
 			);
 			path = ProjectList;
 			sourceTree = "<group>";
@@ -123,12 +126,12 @@
 		ADE1F178206CCE6A007D89AA /* PodfileEditor */ = {
 			isa = PBXGroup;
 			children = (
+				AD4E756220750BB100205D4C /* PodfileEditor.entitlements */,
 				AD02C313206CEC9500CC9915 /* Source */,
 				ADE1F179206CCE6A007D89AA /* AppDelegate.swift */,
 				ADE1F18D206CDE52007D89AA /* Assets.xcassets */,
 				ADE1F17F206CCE6A007D89AA /* Main.storyboard */,
 				ADE1F182206CCE6A007D89AA /* Info.plist */,
-				ADE1F183206CCE6A007D89AA /* PodfileEditor.entitlements */,
 			);
 			path = PodfileEditor;
 			sourceTree = "<group>";
@@ -166,6 +169,11 @@
 					ADE1F175206CCE6A007D89AA = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -215,6 +223,7 @@
 				ADE1F17C206CCE6A007D89AA /* ProjectListViewController.swift in Sources */,
 				AD4E755F2074FE8300205D4C /* ProjectListDataController.swift in Sources */,
 				ADE1F18A206CD7AF007D89AA /* ProjectInfoCellView.swift in Sources */,
+				AD4E756520750ECB00205D4C /* EditProjectViewController.swift in Sources */,
 				ADE1F17A206CCE6A007D89AA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
