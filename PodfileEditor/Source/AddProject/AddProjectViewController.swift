@@ -13,6 +13,9 @@ class AddProjectViewController: NSViewController {
     @IBOutlet weak var pathTextField: NSTextField!
     @IBOutlet weak var projectNameTextField: NSTextField!
     
+    typealias CompletionBlock = (String, String) -> (Void)
+    var chooseCompletion: CompletionBlock?
+    
     private let openPanel: NSOpenPanel = {
         let openPanel = NSOpenPanel()
         openPanel.allowsMultipleSelection = false
@@ -36,6 +39,10 @@ class AddProjectViewController: NSViewController {
         
         if self.checkInput() {
             self.dismiss(nil)
+            
+            if let chooseCompletion = chooseCompletion {
+                chooseCompletion(projectNameTextField.stringValue, pathTextField.stringValue)
+            }
         }
     }
 

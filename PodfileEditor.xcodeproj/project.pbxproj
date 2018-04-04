@@ -10,6 +10,9 @@
 		AD02C315206D02CF00CC9915 /* Windows.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02C314206D02CF00CC9915 /* Windows.swift */; };
 		AD02C317206D068100CC9915 /* AddProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02C316206D068100CC9915 /* AddProjectViewController.swift */; };
 		AD02C319206D06A900CC9915 /* UIFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02C318206D06A900CC9915 /* UIFactory.swift */; };
+		AD4E755D2074FE4D00205D4C /* ProjectInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E755C2074FE4D00205D4C /* ProjectInfo.swift */; };
+		AD4E755F2074FE8300205D4C /* ProjectListDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E755E2074FE8300205D4C /* ProjectListDataController.swift */; };
+		AD4E75612075006300205D4C /* ProjectInfoCellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E75602075006300205D4C /* ProjectInfoCellConfigurator.swift */; };
 		ADE1F17A206CCE6A007D89AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1F179206CCE6A007D89AA /* AppDelegate.swift */; };
 		ADE1F17C206CCE6A007D89AA /* ProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1F17B206CCE6A007D89AA /* ProjectListViewController.swift */; };
 		ADE1F181206CCE6A007D89AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADE1F17F206CCE6A007D89AA /* Main.storyboard */; };
@@ -24,6 +27,9 @@
 		AD02C314206D02CF00CC9915 /* Windows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Windows.swift; sourceTree = "<group>"; };
 		AD02C316206D068100CC9915 /* AddProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectViewController.swift; sourceTree = "<group>"; };
 		AD02C318206D06A900CC9915 /* UIFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFactory.swift; sourceTree = "<group>"; };
+		AD4E755C2074FE4D00205D4C /* ProjectInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfo.swift; sourceTree = "<group>"; };
+		AD4E755E2074FE8300205D4C /* ProjectListDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListDataController.swift; sourceTree = "<group>"; };
+		AD4E75602075006300205D4C /* ProjectInfoCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfoCellConfigurator.swift; sourceTree = "<group>"; };
 		ADE1F176206CCE6A007D89AA /* PodfileEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodfileEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE1F179206CCE6A007D89AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADE1F17B206CCE6A007D89AA /* ProjectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +88,9 @@
 				ADE1F17B206CCE6A007D89AA /* ProjectListViewController.swift */,
 				ADE1F189206CD7AF007D89AA /* ProjectInfoCellView.swift */,
 				ADE1F18B206CD7C5007D89AA /* ProjectInfoCellView.xib */,
+				AD4E755C2074FE4D00205D4C /* ProjectInfo.swift */,
+				AD4E755E2074FE8300205D4C /* ProjectListDataController.swift */,
+				AD4E75602075006300205D4C /* ProjectInfoCellConfigurator.swift */,
 			);
 			path = ProjectList;
 			sourceTree = "<group>";
@@ -197,11 +206,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD02C319206D06A900CC9915 /* UIFactory.swift in Sources */,
+				AD4E755D2074FE4D00205D4C /* ProjectInfo.swift in Sources */,
 				AD02C317206D068100CC9915 /* AddProjectViewController.swift in Sources */,
+				AD4E75612075006300205D4C /* ProjectInfoCellConfigurator.swift in Sources */,
 				ADE1F194206CEBFE007D89AA /* ProjectDetailWindowController.swift in Sources */,
 				AD02C315206D02CF00CC9915 /* Windows.swift in Sources */,
 				ADE1F196206CEC15007D89AA /* ProjectDetailViewController.swift in Sources */,
 				ADE1F17C206CCE6A007D89AA /* ProjectListViewController.swift in Sources */,
+				AD4E755F2074FE8300205D4C /* ProjectListDataController.swift in Sources */,
 				ADE1F18A206CD7AF007D89AA /* ProjectInfoCellView.swift in Sources */,
 				ADE1F17A206CCE6A007D89AA /* AppDelegate.swift in Sources */,
 			);

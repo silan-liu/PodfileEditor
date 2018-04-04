@@ -14,8 +14,10 @@ class ProjectListViewController: NSViewController, NSTableViewDelegate, NSTableV
     
     var projectDetailWindowController: ProjectDetailWindowController?
     
+    lazy var projectInfoCellConfigurator = ProjectInfoCellConfigurator()
+    lazy var projectListDataController = ProjectListDataController()
+    
     let projectInfoCellViewName = "ProjectInfoCellView"
-    let projectDetailWindowControllerName = "ProjectDetailWindowController"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,15 +28,18 @@ class ProjectListViewController: NSViewController, NSTableViewDelegate, NSTableV
         tableView.doubleAction = #selector(doubleClickRow)
     }
 
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
+    deinit {
+        NSLog("ProjectListViewController dealloc")
     }
     
     // MARK:Action
     @IBAction func addProject(_ sender: Any) {
         if let vc = UIFactory.addProjectViewController() {
+            vc.chooseCompletion = { (projectName, projectPath) in
+                self.projectListDataController.addProject(projectName: projectName, projectPath: projectPath)
+                self.tableView.reloadData()
+            }
+            
             self.presentViewControllerAsSheet(vc)
         }
     }
@@ -44,19 +49,32 @@ class ProjectListViewController: NSViewController, NSTableViewDelegate, NSTableV
         
         NSLog("double click row, %d", row)
 
-        projectDetailWindowController = UIFactory.projectDetailWindowController()
-        projectDetailWindowController?.showWindow(nil)
+        gotoDetail(at: row)
     }
 
     // MARK:NSTableViewDelegate
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return 1
+        return projectListDataController.numberOfRows()
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cellView: ProjectInfoCellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: projectInfoCellViewName), owner: self) as! ProjectInfoCellView
  
+        if let projectInfo = projectListDataController.projectInfoAtRow(row: row) {
+            projectInfoCellConfigurator.configCell(cell: cellView, info: projectInfo)
+        }
+        
+        cellView.deleteBlock = { cell in
+            let row = tableView.row(for: cellView)
+            self.deleteProject(at: row)
+        }
+        
+        cellView.editBlock = { cell in
+            let row = tableView.row(for: cellView)
+            self.editProject(at: row)
+        }
+        
         return cellView
     }
     
@@ -65,8 +83,27 @@ class ProjectListViewController: NSViewController, NSTableViewDelegate, NSTableV
         return 100
     }
     
-    func tableViewSelectionDidChange(_ notification: Notification) {
-
+    // MARK:Edit/Del
+    func editProject(at row: Int) {
+        gotoDetail(at: row)
+    }
+    
+    func deleteProject(at row: Int) {
+        projectListDataController.deleteProject(at: row)
+        tableView.reloadData()
+    }
+    
+    func gotoDetail(at row: Int) {
+        if let projectInfo = projectListDataController.projectInfoAtRow(row: row) {
+            // 进入详情页
+            projectDetailWindowController = UIFactory.projectDetailWindowController()
+            
+            if let detailVC = projectDetailWindowController?.contentViewController as? ProjectDetailViewController {
+                detailVC.projectInfo = projectInfo
+            }
+            
+            projectDetailWindowController?.showWindow(nil)
+        }
     }
 }
 

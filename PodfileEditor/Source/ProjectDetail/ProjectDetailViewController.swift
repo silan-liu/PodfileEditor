@@ -10,9 +10,20 @@ import Cocoa
 
 class ProjectDetailViewController: NSViewController {
 
+    var projectInfo: ProjectInfo? {
+        didSet {
+            parsePodfile()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
     }
     
+    func parsePodfile() {
+        if let projectInfo = projectInfo {
+            print("projectInfo:\(projectInfo.projectPath)")
+        }
+    }
 }

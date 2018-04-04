@@ -9,11 +9,24 @@
 import Cocoa
 
 class ProjectInfoCellView: NSTableCellView {
+    
+    @IBOutlet weak var projectPathLabel: NSTextField!
+    @IBOutlet weak var projectNameLabel: NSTextField!
+    
+    var editBlock: ((ProjectInfoCellView) -> (Void))?
+    var deleteBlock: ((ProjectInfoCellView) -> (Void))?
+
     @IBAction func edit(_ sender: Any) {
-        NSLog("edit")
+        
+        if let editBlock = editBlock {
+            editBlock(self)
+        }
     }
     
     @IBAction func delete(_ sender: Any) {
-        NSLog("delete")
+        
+        if let deleteBlock = deleteBlock {
+            deleteBlock(self)
+        }
     }
 }
