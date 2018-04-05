@@ -66,6 +66,7 @@ class AddProjectViewController: NSViewController {
         }
         
         let result = checkPath(path: pathTextField.stringValue)
+        errorLabel.stringValue = result.1
         
         return result.0
     }

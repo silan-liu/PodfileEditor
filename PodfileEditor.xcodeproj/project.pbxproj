@@ -10,6 +10,8 @@
 		AD02C315206D02CF00CC9915 /* Windows.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02C314206D02CF00CC9915 /* Windows.swift */; };
 		AD02C317206D068100CC9915 /* AddProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02C316206D068100CC9915 /* AddProjectViewController.swift */; };
 		AD02C319206D06A900CC9915 /* UIFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02C318206D06A900CC9915 /* UIFactory.swift */; };
+		AD34F1492075D33000BBD802 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD34F1472075D33000BBD802 /* TestViewController.swift */; };
+		AD34F14C2075D37000BBD802 /* AddProjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD34F14B2075D37000BBD802 /* AddProjectViewController.xib */; };
 		AD4E755D2074FE4D00205D4C /* ProjectInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E755C2074FE4D00205D4C /* ProjectInfo.swift */; };
 		AD4E755F2074FE8300205D4C /* ProjectListDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E755E2074FE8300205D4C /* ProjectListDataController.swift */; };
 		AD4E75612075006300205D4C /* ProjectInfoCellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E75602075006300205D4C /* ProjectInfoCellConfigurator.swift */; };
@@ -28,6 +30,8 @@
 		AD02C314206D02CF00CC9915 /* Windows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Windows.swift; sourceTree = "<group>"; };
 		AD02C316206D068100CC9915 /* AddProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectViewController.swift; sourceTree = "<group>"; };
 		AD02C318206D06A900CC9915 /* UIFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFactory.swift; sourceTree = "<group>"; };
+		AD34F1472075D33000BBD802 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		AD34F14B2075D37000BBD802 /* AddProjectViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddProjectViewController.xib; sourceTree = "<group>"; };
 		AD4E755C2074FE4D00205D4C /* ProjectInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfo.swift; sourceTree = "<group>"; };
 		AD4E755E2074FE8300205D4C /* ProjectListDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListDataController.swift; sourceTree = "<group>"; };
 		AD4E75602075006300205D4C /* ProjectInfoCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfoCellConfigurator.swift; sourceTree = "<group>"; };
@@ -71,6 +75,8 @@
 			isa = PBXGroup;
 			children = (
 				AD02C316206D068100CC9915 /* AddProjectViewController.swift */,
+				AD34F1472075D33000BBD802 /* TestViewController.swift */,
+				AD34F14B2075D37000BBD802 /* AddProjectViewController.xib */,
 			);
 			path = AddProject;
 			sourceTree = "<group>";
@@ -202,6 +208,7 @@
 			files = (
 				ADE1F18C206CD7C5007D89AA /* ProjectInfoCellView.xib in Resources */,
 				ADE1F18E206CDE52007D89AA /* Assets.xcassets in Resources */,
+				AD34F14C2075D37000BBD802 /* AddProjectViewController.xib in Resources */,
 				ADE1F181206CCE6A007D89AA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,6 +225,7 @@
 				AD02C317206D068100CC9915 /* AddProjectViewController.swift in Sources */,
 				AD4E75612075006300205D4C /* ProjectInfoCellConfigurator.swift in Sources */,
 				ADE1F194206CEBFE007D89AA /* ProjectDetailWindowController.swift in Sources */,
+				AD34F1492075D33000BBD802 /* TestViewController.swift in Sources */,
 				AD02C315206D02CF00CC9915 /* Windows.swift in Sources */,
 				ADE1F196206CEC15007D89AA /* ProjectDetailViewController.swift in Sources */,
 				ADE1F17C206CCE6A007D89AA /* ProjectListViewController.swift in Sources */,

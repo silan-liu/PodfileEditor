@@ -702,10 +702,10 @@
             </objects>
             <point key="canvasLocation" x="68.5" y="147"/>
         </scene>
-        <!--Add Project View Controller-->
+        <!--View Controller-->
         <scene sceneID="E6a-3j-M6K">
             <objects>
-                <viewController storyboardIdentifier="AddProjectViewController" id="NPR-nG-Wwi" customClass="AddProjectViewController" customModule="PodfileEditor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddProjectViewController" id="NPR-nG-Wwi" sceneMemberID="viewController">
                     <view key="view" id="wYB-ti-O6X">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="238"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -823,7 +823,7 @@ Gw
                 </viewController>
                 <customObject id="rgV-8n-eun" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-13" y="1146"/>
+            <point key="canvasLocation" x="-104" y="1174"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="2cq-Kn-A36">

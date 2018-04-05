@@ -17,8 +17,8 @@ class UIFactory: NSObject {
     }
     
     static func addProjectViewController() -> AddProjectViewController? {
-        let storyboard = self.mainStoryboard()
-        let vc = storyboard?.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue:"AddProjectViewController")) as? AddProjectViewController
+        let vc = AddProjectViewController(nibName: NSNib.Name("AddProjectViewController"), bundle: nil)
+    
         return vc
     }
     
@@ -28,7 +28,7 @@ class UIFactory: NSObject {
         return storyboard
     }
     
-    static func editProjectViewController() -> EditProjectViewController {
-        return EditProjectViewController()
-    }
+//    static func editProjectViewController() -> EditProjectViewController {
+//        return EditProjectViewController()
+//    }
 }

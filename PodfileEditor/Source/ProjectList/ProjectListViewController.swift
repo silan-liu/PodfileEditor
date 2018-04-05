@@ -86,15 +86,16 @@ class ProjectListViewController: NSViewController, NSTableViewDelegate, NSTableV
     // MARK:Edit/Del
     func editProject(at row: Int) {
         // 编辑project信息
-        let vc = UIFactory.editProjectViewController()
-        
-        vc.chooseCompletion = { (projectName, projectPath) in
-            self.projectListDataController.addProject(projectName: projectName, projectPath: projectPath)
-            self.tableView.reloadData()
+         if let projectInfo = projectListDataController.projectInfoAtRow(row: row) {
+            let vc = EditProjectViewController(projectInfo: projectInfo)
+            
+//            vc.chooseCompletion = { (projectName, projectPath) in
+//                self.projectListDataController.addProject(projectName: projectName, projectPath: projectPath)
+//                self.tableView.reloadData()
+//            }
+            
+            self.presentViewControllerAsSheet(vc)
         }
-        
-        self.presentViewControllerAsSheet(vc)
-        
     }
     
     func deleteProject(at row: Int) {
