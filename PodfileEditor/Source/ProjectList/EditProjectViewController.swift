@@ -27,7 +27,7 @@ class EditProjectViewController: AddProjectViewController {
         super.viewDidLoad()
         
         // Do view setup here.
-        self.projectNameTextField.stringValue = projectInfo.projectPath
+        self.projectNameTextField.stringValue = projectInfo.projectName
         self.pathTextField.stringValue = projectInfo.projectPath
     }
     
