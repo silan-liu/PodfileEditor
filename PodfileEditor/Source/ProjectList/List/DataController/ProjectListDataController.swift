@@ -52,4 +52,12 @@ class ProjectListDataController: NSObject {
             projectList?.remove(at: row)
         }
     }
+    
+    func editProject(at row: Int, projectName: String, projectPath: String) {
+        let info = ProjectInfo(projectPath: projectPath, projectName: projectName)
+        let rowCount = numberOfRows()
+        if (row >= 0 && row < rowCount) {
+            projectList?[row] = info;
+        }
+    }
 }

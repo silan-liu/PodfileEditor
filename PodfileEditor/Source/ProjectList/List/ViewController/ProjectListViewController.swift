@@ -89,10 +89,10 @@ class ProjectListViewController: NSViewController, NSTableViewDelegate, NSTableV
          if let projectInfo = projectListDataController.projectInfoAtRow(row: row) {
             let vc = EditProjectViewController(projectInfo: projectInfo)
             
-//            vc.chooseCompletion = { (projectName, projectPath) in
-//                self.projectListDataController.addProject(projectName: projectName, projectPath: projectPath)
-//                self.tableView.reloadData()
-//            }
+            vc.chooseCompletion = { (projectName, projectPath) in
+                self.projectListDataController.editProject(at: row, projectName: projectName, projectPath: projectPath)
+                self.tableView.reloadData()
+            }
             
             self.presentViewControllerAsSheet(vc)
         }
