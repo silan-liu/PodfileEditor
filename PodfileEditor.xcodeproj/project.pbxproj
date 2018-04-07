@@ -15,6 +15,7 @@
 		AD4E755F2074FE8300205D4C /* ProjectListDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E755E2074FE8300205D4C /* ProjectListDataController.swift */; };
 		AD4E75612075006300205D4C /* ProjectInfoCellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E75602075006300205D4C /* ProjectInfoCellConfigurator.swift */; };
 		AD4E756520750ECB00205D4C /* EditProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E756420750ECB00205D4C /* EditProjectViewController.swift */; };
+		AD8F5282207895B800128029 /* CommandExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8F5281207895B800128029 /* CommandExecutor.swift */; };
 		ADE1F17A206CCE6A007D89AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1F179206CCE6A007D89AA /* AppDelegate.swift */; };
 		ADE1F17C206CCE6A007D89AA /* ProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1F17B206CCE6A007D89AA /* ProjectListViewController.swift */; };
 		ADE1F181206CCE6A007D89AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADE1F17F206CCE6A007D89AA /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 		AD4E75602075006300205D4C /* ProjectInfoCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfoCellConfigurator.swift; sourceTree = "<group>"; };
 		AD4E756220750BB100205D4C /* PodfileEditor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PodfileEditor.entitlements; sourceTree = "<group>"; };
 		AD4E756420750ECB00205D4C /* EditProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectViewController.swift; sourceTree = "<group>"; };
+		AD8F5281207895B800128029 /* CommandExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandExecutor.swift; sourceTree = "<group>"; };
 		ADE1F176206CCE6A007D89AA /* PodfileEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodfileEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE1F179206CCE6A007D89AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADE1F17B206CCE6A007D89AA /* ProjectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			children = (
 				AD02C314206D02CF00CC9915 /* Windows.swift */,
 				AD02C318206D06A900CC9915 /* UIFactory.swift */,
+				AD8F5281207895B800128029 /* CommandExecutor.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -222,7 +225,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -268,6 +271,7 @@
 				AD02C319206D06A900CC9915 /* UIFactory.swift in Sources */,
 				AD4E755D2074FE4D00205D4C /* ProjectInfo.swift in Sources */,
 				AD02C317206D068100CC9915 /* AddProjectViewController.swift in Sources */,
+				AD8F5282207895B800128029 /* CommandExecutor.swift in Sources */,
 				AD4E75612075006300205D4C /* ProjectInfoCellConfigurator.swift in Sources */,
 				ADE1F194206CEBFE007D89AA /* ProjectDetailWindowController.swift in Sources */,
 				AD02C315206D02CF00CC9915 /* Windows.swift in Sources */,
@@ -404,7 +408,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = PodfileEditor/PodfileEditor.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = PodfileEditor/Info.plist;
@@ -419,7 +422,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = PodfileEditor/PodfileEditor.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = PodfileEditor/Info.plist;
