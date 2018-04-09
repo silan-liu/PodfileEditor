@@ -60,6 +60,10 @@ class ProjectDetailViewController: NSViewController {
 """)
     }
     
+    @IBAction func clearConsole(_ sender: Any) {
+        self.textView.string = ""
+    }
+    
     func updateCommandOutput(output: String) {
         DispatchQueue.main.async {
             self.textView.string = self.textView.string.appending(output)
