@@ -15,6 +15,7 @@
 		AD4E755F2074FE8300205D4C /* ProjectListDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E755E2074FE8300205D4C /* ProjectListDataController.swift */; };
 		AD4E75612075006300205D4C /* ProjectInfoCellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E75602075006300205D4C /* ProjectInfoCellConfigurator.swift */; };
 		AD4E756520750ECB00205D4C /* EditProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E756420750ECB00205D4C /* EditProjectViewController.swift */; };
+		AD4F896D20847F9B00DF1FD5 /* ProjectDetailDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4F896C20847F9B00DF1FD5 /* ProjectDetailDataController.swift */; };
 		AD8F5282207895B800128029 /* CommandExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8F5281207895B800128029 /* CommandExecutor.swift */; };
 		ADE1F17A206CCE6A007D89AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1F179206CCE6A007D89AA /* AppDelegate.swift */; };
 		ADE1F17C206CCE6A007D89AA /* ProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1F17B206CCE6A007D89AA /* ProjectListViewController.swift */; };
@@ -36,6 +37,7 @@
 		AD4E75602075006300205D4C /* ProjectInfoCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfoCellConfigurator.swift; sourceTree = "<group>"; };
 		AD4E756220750BB100205D4C /* PodfileEditor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PodfileEditor.entitlements; sourceTree = "<group>"; };
 		AD4E756420750ECB00205D4C /* EditProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectViewController.swift; sourceTree = "<group>"; };
+		AD4F896C20847F9B00DF1FD5 /* ProjectDetailDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailDataController.swift; sourceTree = "<group>"; };
 		AD8F5281207895B800128029 /* CommandExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandExecutor.swift; sourceTree = "<group>"; };
 		ADE1F176206CCE6A007D89AA /* PodfileEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodfileEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE1F179206CCE6A007D89AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -102,10 +104,27 @@
 		AD02C31D206D10DE00CC9915 /* ProjectDetail */ = {
 			isa = PBXGroup;
 			children = (
+				AD4F896B20847F7F00DF1FD5 /* DataController */,
+				AD4F896A20847F7200DF1FD5 /* ViewController */,
+			);
+			path = ProjectDetail;
+			sourceTree = "<group>";
+		};
+		AD4F896A20847F7200DF1FD5 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
 				ADE1F193206CEBFE007D89AA /* ProjectDetailWindowController.swift */,
 				ADE1F195206CEC15007D89AA /* ProjectDetailViewController.swift */,
 			);
-			path = ProjectDetail;
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		AD4F896B20847F7F00DF1FD5 /* DataController */ = {
+			isa = PBXGroup;
+			children = (
+				AD4F896C20847F9B00DF1FD5 /* ProjectDetailDataController.swift */,
+			);
+			path = DataController;
 			sourceTree = "<group>";
 		};
 		AD8F527B20788E9600128029 /* Edit */ = {
@@ -270,6 +289,7 @@
 			files = (
 				AD02C319206D06A900CC9915 /* UIFactory.swift in Sources */,
 				AD4E755D2074FE4D00205D4C /* ProjectInfo.swift in Sources */,
+				AD4F896D20847F9B00DF1FD5 /* ProjectDetailDataController.swift in Sources */,
 				AD02C317206D068100CC9915 /* AddProjectViewController.swift in Sources */,
 				AD8F5282207895B800128029 /* CommandExecutor.swift in Sources */,
 				AD4E75612075006300205D4C /* ProjectInfoCellConfigurator.swift in Sources */,
