@@ -737,8 +737,8 @@
                                     <constraint firstAttribute="height" constant="40" id="nrJ-dA-tUT"/>
                                     <constraint firstAttribute="width" constant="40" id="wB9-uk-DoD"/>
                                 </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="add" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="yuN-5J-kIf">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="add" imagePosition="only" alignment="center" alternateImage="add_pressed" imageScaling="proportionallyUpOrDown" inset="2" id="yuN-5J-kIf">
+                                    <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
@@ -756,8 +756,8 @@
                                     <constraint firstAttribute="width" constant="40" id="lnz-pe-uOu"/>
                                     <constraint firstAttribute="height" constant="40" id="uIb-qY-nyB"/>
                                 </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="add" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="XUZ-Tq-bPQ">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="refresh" imagePosition="only" alignment="center" alternateImage="refresh_pressed" imageScaling="proportionallyUpOrDown" inset="2" id="XUZ-Tq-bPQ">
+                                    <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
@@ -852,6 +852,15 @@
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="minSize" width="758" height="192"/>
                                             <size key="maxSize" width="1060" height="10000000"/>
+                                            <attributedString key="textStorage">
+                                                <fragment content="console output">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.23102688139999999" green="1" blue="0.1949291437" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="12" name="Helvetica"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         </textView>
                                     </subviews>
@@ -868,20 +877,6 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <button translatesAutoresizingMaskIntoConstraints="NO" id="49c-L2-wAG">
-                                <rect key="frame" x="194" y="599" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="7mJ-0v-C8e"/>
-                                    <constraint firstAttribute="height" constant="40" id="yfa-KW-CDz"/>
-                                </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="add" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="dDd-AY-CcF">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="podInstallAction:" target="eaV-Sa-27M" id="V7Z-qf-EXI"/>
-                                </connections>
-                            </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bh2-kq-9db">
                                 <rect key="frame" x="194" y="580" width="40" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="install" id="K0e-Ir-p0K">
@@ -901,6 +896,20 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="clearConsole:" target="eaV-Sa-27M" id="QKy-Td-wAq"/>
+                                </connections>
+                            </button>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="49c-L2-wAG">
+                                <rect key="frame" x="194" y="599" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="7mJ-0v-C8e"/>
+                                    <constraint firstAttribute="height" constant="40" id="yfa-KW-CDz"/>
+                                </constraints>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="install" imagePosition="overlaps" alignment="center" alternateImage="install_pressed" imageScaling="proportionallyUpOrDown" inset="2" id="dDd-AY-CcF">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="podInstallAction:" target="eaV-Sa-27M" id="0SH-gi-76Z"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1023,8 +1032,8 @@
                                     <constraint firstAttribute="height" constant="48" id="CVW-YE-sgU"/>
                                     <constraint firstAttribute="width" constant="48" id="Wcm-60-tgg"/>
                                 </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="add" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="baO-o0-UIv">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="add" imagePosition="only" alignment="center" alternateImage="add_pressed" imageScaling="proportionallyUpOrDown" inset="2" id="baO-o0-UIv">
+                                    <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
@@ -1053,6 +1062,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="add" width="100" height="100"/>
+        <image name="add" width="64" height="64"/>
+        <image name="add_pressed" width="64" height="64"/>
+        <image name="install" width="64" height="64"/>
+        <image name="install_pressed" width="64" height="64"/>
+        <image name="refresh" width="64" height="64"/>
+        <image name="refresh_pressed" width="64" height="64"/>
     </resources>
 </document>

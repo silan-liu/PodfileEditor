@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -35,8 +35,8 @@
                         <constraint firstAttribute="height" constant="30" id="NEd-eq-mvC"/>
                         <constraint firstAttribute="width" constant="30" id="ouY-CG-93H"/>
                     </constraints>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="delete" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="Nkb-Sz-Aok">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="delete" imagePosition="only" alignment="center" alternateImage="delete_pressed" imageScaling="proportionallyUpOrDown" inset="2" id="Nkb-Sz-Aok">
+                        <behavior key="behavior" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
@@ -49,8 +49,8 @@
                         <constraint firstAttribute="height" constant="30" id="UUR-8J-aj0"/>
                         <constraint firstAttribute="width" constant="30" id="fiK-Xd-iqF"/>
                     </constraints>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="edit" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="5k0-tM-F06">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="edit" imagePosition="overlaps" alignment="center" alternateImage="edit_pressed" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="5k0-tM-F06">
+                        <behavior key="behavior" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
@@ -77,6 +77,8 @@
     </objects>
     <resources>
         <image name="delete" width="100" height="100"/>
-        <image name="edit" width="100" height="100"/>
+        <image name="delete_pressed" width="100" height="100"/>
+        <image name="edit" width="32" height="32"/>
+        <image name="edit_pressed" width="32" height="32"/>
     </resources>
 </document>
