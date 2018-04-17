@@ -28,11 +28,15 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
         }
     }
     
+    private lazy var dataController: ProjectDetailDataController = ProjectDetailDataController(projectInfo: projectInfo)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
         
         setupTableView();
+        
+        
     }
     
     //MARK: UI
@@ -45,7 +49,7 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
     //MARK: TableView Delegate
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return 10
+        return dataController.numberOfRows()
     }
     
      func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -69,19 +73,29 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
         }
         
         let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "TestCell"), owner: nil)  as! NSTableCellView
-        if tableColumn == tableView.tableColumns.first {
-            cell.textField?.stringValue = "fds"
-        } else {
-            cell.textField?.stringValue = "if的好时机发送到家乐福几点开始房间看电视附近的开始放假时代峰峻单身快乐"
+        
+        if let dep = dataController.dependencyInfo(at: row) {
+            if tableColumn == tableView.tableColumns.first {
+                cell.textField?.stringValue = dep.name
+            } else {
+                cell.textField?.stringValue = "testest"
+            }
         }
         
         return cell
+    }
+    
+    // MARK:NSTableViewDataSource
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        return 80
     }
     
     //MARK：Action
     @IBAction func podInstallAction(_ sender: Any) {
         self.updateCommandOutput(output: """
 \n
+========================================
+            script start
 ========================================
 \n
 """)
@@ -91,6 +105,8 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
         
         self.updateCommandOutput(output: """
 \n
+========================================
+            script end
 ========================================
 \n
 """)
@@ -122,7 +138,8 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
     
     // 删除依赖
     func deleteDependency(at row: Int) {
-        
+        dataController.deleteDependency(at: row)
+        tableView.reloadData()
     }
     
     deinit {
