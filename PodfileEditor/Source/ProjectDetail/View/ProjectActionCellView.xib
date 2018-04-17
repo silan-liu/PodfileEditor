@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView identifier="ProjectActionCellView" id="c22-O7-iKe" customClass="ProjectActionCellView" customModule="PodfileEditor" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="109" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="pw0-nl-lSF">
+                    <rect key="frame" x="15" y="15" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="8yY-N2-9ck"/>
+                        <constraint firstAttribute="width" constant="30" id="U8g-d8-hfs"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="edit" imagePosition="only" alignment="center" alternateImage="edit_pressed" imageScaling="proportionallyUpOrDown" inset="2" id="C8A-VH-y13">
+                        <behavior key="behavior" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="edit:" target="c22-O7-iKe" id="NMe-4m-vYa"/>
+                    </connections>
+                </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="Umb-s4-bsC">
+                    <rect key="frame" x="61" y="15" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="7Ub-sN-nYR"/>
+                        <constraint firstAttribute="height" constant="30" id="bvy-qx-Am5"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="delete" imagePosition="only" alignment="center" alternateImage="delete_pressed" imageScaling="proportionallyUpOrDown" inset="2" id="top-OQ-m2C">
+                        <behavior key="behavior" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="delete:" target="c22-O7-iKe" id="6Le-qC-KTd"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Umb-s4-bsC" firstAttribute="centerY" secondItem="pw0-nl-lSF" secondAttribute="centerY" id="8bx-WY-Fmk"/>
+                <constraint firstItem="Umb-s4-bsC" firstAttribute="leading" secondItem="pw0-nl-lSF" secondAttribute="trailing" constant="16" id="FTn-Xv-Jya"/>
+                <constraint firstItem="pw0-nl-lSF" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="15" id="Tvn-Rs-4xx"/>
+                <constraint firstItem="pw0-nl-lSF" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="hAB-Uq-Vtc"/>
+            </constraints>
+            <point key="canvasLocation" x="-46.5" y="63"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="delete" width="32" height="32"/>
+        <image name="delete_pressed" width="32" height="32"/>
+        <image name="edit" width="32" height="32"/>
+        <image name="edit_pressed" width="32" height="32"/>
+    </resources>
+</document>

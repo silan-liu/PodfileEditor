@@ -65,14 +65,14 @@ class ProjectListViewController: NSViewController, NSTableViewDelegate, NSTableV
             projectInfoCellConfigurator.configCell(cell: cellView, info: projectInfo)
         }
         
-        cellView.deleteBlock = { cell in
+        cellView.deleteBlock = { [weak self] cell in
             let row = tableView.row(for: cellView)
-            self.deleteProject(at: row)
+            self?.deleteProject(at: row)
         }
         
-        cellView.editBlock = { cell in
+        cellView.editBlock = { [weak self] cell in
             let row = tableView.row(for: cellView)
-            self.editProject(at: row)
+            self?.editProject(at: row)
         }
         
         return cellView

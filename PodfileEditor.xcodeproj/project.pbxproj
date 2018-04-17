@@ -17,6 +17,8 @@
 		AD4E756520750ECB00205D4C /* EditProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E756420750ECB00205D4C /* EditProjectViewController.swift */; };
 		AD4F896D20847F9B00DF1FD5 /* ProjectDetailDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4F896C20847F9B00DF1FD5 /* ProjectDetailDataController.swift */; };
 		AD8F5282207895B800128029 /* CommandExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8F5281207895B800128029 /* CommandExecutor.swift */; };
+		ADDBB6902085DCA400A020CA /* ProjectActionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDBB68F2085DCA400A020CA /* ProjectActionCellView.swift */; };
+		ADDBB6922085DCB500A020CA /* ProjectActionCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADDBB6912085DCB500A020CA /* ProjectActionCellView.xib */; };
 		ADE1F17A206CCE6A007D89AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1F179206CCE6A007D89AA /* AppDelegate.swift */; };
 		ADE1F17C206CCE6A007D89AA /* ProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1F17B206CCE6A007D89AA /* ProjectListViewController.swift */; };
 		ADE1F181206CCE6A007D89AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADE1F17F206CCE6A007D89AA /* Main.storyboard */; };
@@ -39,6 +41,8 @@
 		AD4E756420750ECB00205D4C /* EditProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectViewController.swift; sourceTree = "<group>"; };
 		AD4F896C20847F9B00DF1FD5 /* ProjectDetailDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailDataController.swift; sourceTree = "<group>"; };
 		AD8F5281207895B800128029 /* CommandExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandExecutor.swift; sourceTree = "<group>"; };
+		ADDBB68F2085DCA400A020CA /* ProjectActionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectActionCellView.swift; sourceTree = "<group>"; };
+		ADDBB6912085DCB500A020CA /* ProjectActionCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectActionCellView.xib; sourceTree = "<group>"; };
 		ADE1F176206CCE6A007D89AA /* PodfileEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodfileEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE1F179206CCE6A007D89AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADE1F17B206CCE6A007D89AA /* ProjectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +108,7 @@
 		AD02C31D206D10DE00CC9915 /* ProjectDetail */ = {
 			isa = PBXGroup;
 			children = (
+				ADDBB68E2085D00400A020CA /* View */,
 				AD4F896B20847F7F00DF1FD5 /* DataController */,
 				AD4F896A20847F7200DF1FD5 /* ViewController */,
 			);
@@ -178,6 +183,15 @@
 				AD4E75602075006300205D4C /* ProjectInfoCellConfigurator.swift */,
 			);
 			path = DataController;
+			sourceTree = "<group>";
+		};
+		ADDBB68E2085D00400A020CA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ADDBB68F2085DCA400A020CA /* ProjectActionCellView.swift */,
+				ADDBB6912085DCB500A020CA /* ProjectActionCellView.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		ADE1F16D206CCE6A007D89AA = {
@@ -273,6 +287,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADDBB6922085DCB500A020CA /* ProjectActionCellView.xib in Resources */,
 				ADE1F18C206CD7C5007D89AA /* ProjectInfoCellView.xib in Resources */,
 				ADE1F18E206CDE52007D89AA /* Assets.xcassets in Resources */,
 				AD34F14C2075D37000BBD802 /* AddProjectViewController.xib in Resources */,
@@ -288,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD02C319206D06A900CC9915 /* UIFactory.swift in Sources */,
+				ADDBB6902085DCA400A020CA /* ProjectActionCellView.swift in Sources */,
 				AD4E755D2074FE4D00205D4C /* ProjectInfo.swift in Sources */,
 				AD4F896D20847F9B00DF1FD5 /* ProjectDetailDataController.swift in Sources */,
 				AD02C317206D068100CC9915 /* AddProjectViewController.swift in Sources */,
