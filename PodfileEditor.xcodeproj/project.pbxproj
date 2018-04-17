@@ -20,6 +20,8 @@
 		ADDBB6902085DCA400A020CA /* ProjectActionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDBB68F2085DCA400A020CA /* ProjectActionCellView.swift */; };
 		ADDBB6922085DCB500A020CA /* ProjectActionCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADDBB6912085DCB500A020CA /* ProjectActionCellView.xib */; };
 		ADDBB6972085E50400A020CA /* DependencyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDBB6962085E50400A020CA /* DependencyInfo.swift */; };
+		ADDBB6992085FCDA00A020CA /* ProjectDetailCellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDBB6982085FCDA00A020CA /* ProjectDetailCellConfigurator.swift */; };
+		ADDBB69B2085FDA300A020CA /* ArrayExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDBB69A2085FDA300A020CA /* ArrayExtentions.swift */; };
 		ADE1F17A206CCE6A007D89AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1F179206CCE6A007D89AA /* AppDelegate.swift */; };
 		ADE1F17C206CCE6A007D89AA /* ProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1F17B206CCE6A007D89AA /* ProjectListViewController.swift */; };
 		ADE1F181206CCE6A007D89AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADE1F17F206CCE6A007D89AA /* Main.storyboard */; };
@@ -45,6 +47,8 @@
 		ADDBB68F2085DCA400A020CA /* ProjectActionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectActionCellView.swift; sourceTree = "<group>"; };
 		ADDBB6912085DCB500A020CA /* ProjectActionCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectActionCellView.xib; sourceTree = "<group>"; };
 		ADDBB6962085E50400A020CA /* DependencyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInfo.swift; sourceTree = "<group>"; };
+		ADDBB6982085FCDA00A020CA /* ProjectDetailCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailCellConfigurator.swift; sourceTree = "<group>"; };
+		ADDBB69A2085FDA300A020CA /* ArrayExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtentions.swift; sourceTree = "<group>"; };
 		ADE1F176206CCE6A007D89AA /* PodfileEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodfileEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE1F179206CCE6A007D89AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADE1F17B206CCE6A007D89AA /* ProjectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +97,7 @@
 				AD02C314206D02CF00CC9915 /* Windows.swift */,
 				AD02C318206D06A900CC9915 /* UIFactory.swift */,
 				AD8F5281207895B800128029 /* CommandExecutor.swift */,
+				ADDBB69A2085FDA300A020CA /* ArrayExtentions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -131,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				AD4F896C20847F9B00DF1FD5 /* ProjectDetailDataController.swift */,
+				ADDBB6982085FCDA00A020CA /* ProjectDetailCellConfigurator.swift */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -313,12 +319,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADDBB69B2085FDA300A020CA /* ArrayExtentions.swift in Sources */,
 				AD02C319206D06A900CC9915 /* UIFactory.swift in Sources */,
 				ADDBB6902085DCA400A020CA /* ProjectActionCellView.swift in Sources */,
 				AD4E755D2074FE4D00205D4C /* ProjectInfo.swift in Sources */,
 				AD4F896D20847F9B00DF1FD5 /* ProjectDetailDataController.swift in Sources */,
 				AD02C317206D068100CC9915 /* AddProjectViewController.swift in Sources */,
 				AD8F5282207895B800128029 /* CommandExecutor.swift in Sources */,
+				ADDBB6992085FCDA00A020CA /* ProjectDetailCellConfigurator.swift in Sources */,
 				AD4E75612075006300205D4C /* ProjectInfoCellConfigurator.swift in Sources */,
 				ADE1F194206CEBFE007D89AA /* ProjectDetailWindowController.swift in Sources */,
 				ADDBB6972085E50400A020CA /* DependencyInfo.swift in Sources */,

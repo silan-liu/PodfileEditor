@@ -29,7 +29,8 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
     }
     
     private lazy var dataController: ProjectDetailDataController = ProjectDetailDataController(projectInfo: projectInfo)
-
+    private lazy var projectDetailCellConfigurator = ProjectDetailCellConfigurator()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
@@ -72,13 +73,12 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
             return cell;
         }
         
-        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "TestCell"), owner: nil)  as! NSTableCellView
+        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "ProjectDetailCellView"), owner: nil)  as! NSTableCellView
         
         if let dep = dataController.dependencyInfo(at: row) {
-            if tableColumn == tableView.tableColumns.first {
-                cell.textField?.stringValue = dep.name
-            } else {
-                cell.textField?.stringValue = "testest"
+            let tableColumns = tableView.tableColumns
+            if let tableColumn = tableColumn, let index = tableColumns.index(of: tableColumn) {
+                projectDetailCellConfigurator.configCell(cell: cell, info: dep, index: index)
             }
         }
         

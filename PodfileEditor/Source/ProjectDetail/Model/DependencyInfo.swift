@@ -98,12 +98,14 @@ struct DependencyInfo {
     
     init(name: String, git: String, config: String? = nil, subspecs: [String]? = nil) {
         self.name = name
+        self.git = git
         self.config = config
         self.subspecs = subspecs
     }
     
-    init(name: String, git: String, branch: String, config: String? = nil, subspecs: [String]? = nil) {
+    init(name: String, git: String, branch: String? = nil, config: String? = nil, subspecs: [String]? = nil) {
         self.name = name
+        self.git = git
         self.branch = branch
         self.config = config
         self.subspecs = subspecs
@@ -111,6 +113,7 @@ struct DependencyInfo {
     
     init(name: String, git: String, commit: String, config: String? = nil, subspecs: [String]? = nil) {
         self.name = name
+        self.git = git
         self.commit = commit
         self.config = config
         self.subspecs = subspecs
@@ -118,6 +121,7 @@ struct DependencyInfo {
     
     init(name: String, git: String, tag: String, config: String? = nil, subspecs: [String]? = nil) {
         self.name = name
+        self.git = git
         self.tag = tag
         self.config = config
         self.subspecs = subspecs

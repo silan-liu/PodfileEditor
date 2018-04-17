@@ -28,12 +28,14 @@ class ProjectDetailDataController: NSObject {
         let dep2 = DependencyInfo(name: "lib2", git: "http://gitlbab.lib2")
         let dep3 = DependencyInfo(name: "lib3", git: "http://gitlbab.lib2", tag: "0.0.1")
         let dep4 = DependencyInfo(name: "lib4", version: "9.0.2")
+        let dep5 = DependencyInfo(name: "lib5", git: "http://gitlab.lib5", branch: "dev", config: "debug", subspecs: ["subspec"])
         
         dependencyList.append(dep1)
         dependencyList.append(dep2)
         dependencyList.append(dep3)
         dependencyList.append(dep4)
-        
+        dependencyList.append(dep5)
+
         self.dependencyList = dependencyList
     }
     
