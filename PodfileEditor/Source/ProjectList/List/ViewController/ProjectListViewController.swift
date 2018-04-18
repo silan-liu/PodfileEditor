@@ -104,6 +104,10 @@ class ProjectListViewController: NSViewController, NSTableViewDelegate, NSTableV
     }
     
     func gotoDetail(at row: Int) {
+        if (projectDetailWindowController != nil) {
+            return
+        }
+        
         if let projectInfo = projectListDataController.projectInfoAtRow(row: row) {
             // 进入详情页
             projectDetailWindowController = UIFactory.projectDetailWindowController()
