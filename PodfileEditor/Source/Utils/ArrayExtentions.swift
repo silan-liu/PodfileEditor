@@ -9,12 +9,21 @@
 import Foundation
 
 extension Array where Element == String {
-    func formatedString() -> String {
+    func formateString(_ splitCharacter: String) -> String {
         var string = ""
-        for item in self {
-            string.append(item)
-        }
+        let count = self.count
+        var index = 0
         
+        while index < count {
+            string.append(self[index])
+
+            if index != count - 1 {
+                string.append(splitCharacter)
+            }
+            
+            index = index + 1
+        }
+
         return string
     }
 }

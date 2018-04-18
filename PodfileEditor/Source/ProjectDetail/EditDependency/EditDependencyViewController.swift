@@ -30,11 +30,14 @@ class EditDependencyViewController: AddDependencyViewController {
     
     func updateUI() {
         if let dependencyInfo = dependencyInfo {
+            
             nameTextField.stringValue = dependencyInfo.name
             
             let type = dependencyInfo.type
             typePopupButton.selectItem(at: type.rawValue)
-            
+           
+            chooseType(typePopupButton)
+
             if (type == SourceType.Version) {
                 urlTextField.stringValue = dependencyInfo.version ?? ""
                 versionRequirementPopupButton.selectItem(at: (dependencyInfo.versionRequirement?.rawValue) ?? 0)
@@ -46,7 +49,7 @@ class EditDependencyViewController: AddDependencyViewController {
             }
             
             configPopUpButton.selectItem(at: dependencyInfo.configIndex.rawValue)
-            subspecTextField.stringValue = dependencyInfo.subspecs?.formatedString() ?? ""
+            subspecTextField.stringValue = dependencyInfo.subspecs?.formateString(",") ?? ""
         }
     }
 }

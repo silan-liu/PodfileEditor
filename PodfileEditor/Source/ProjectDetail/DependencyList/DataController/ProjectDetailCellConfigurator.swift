@@ -31,7 +31,7 @@ class ProjectDetailCellConfigurator: NSObject {
             return info.config
 
         case 3:
-            return info.subspecs?.formatedString()
+            return info.subspecs?.formateString(",")
 
         default:
             return nil
@@ -45,7 +45,16 @@ class ProjectDetailCellConfigurator: NSObject {
         case SourceType.Path:
             return info.path
         case SourceType.Git:
-            return info.git
+            if let git = info.git {
+                var value = "git => " + git
+                if let gitDescription = info.gitDescription {
+                    value = value + "\n\nbranch/commit/tag => " + gitDescription
+                }
+
+                return value
+            }
+            
+            return nil
         }
     }
 }

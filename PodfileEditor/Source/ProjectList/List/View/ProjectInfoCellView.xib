@@ -76,8 +76,8 @@
         </customView>
     </objects>
     <resources>
-        <image name="delete" width="100" height="100"/>
-        <image name="delete_pressed" width="100" height="100"/>
+        <image name="delete" width="32" height="32"/>
+        <image name="delete_pressed" width="32" height="32"/>
         <image name="edit" width="32" height="32"/>
         <image name="edit_pressed" width="32" height="32"/>
     </resources>

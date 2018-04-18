@@ -29,7 +29,7 @@ class ProjectListViewController: NSViewController, NSTableViewDelegate, NSTableV
     }
 
     deinit {
-        NSLog("ProjectListViewController dealloc")
+        print("ProjectListViewController dealloc")
     }
     
     // MARK:Action
@@ -104,19 +104,17 @@ class ProjectListViewController: NSViewController, NSTableViewDelegate, NSTableV
     }
     
     func gotoDetail(at row: Int) {
-        if (projectDetailWindowController != nil) {
-            return
-        }
         
         if let projectInfo = projectListDataController.projectInfoAtRow(row: row) {
             // 进入详情页
-            projectDetailWindowController = UIFactory.projectDetailWindowController()
+            let projectDetailWindowController = UIFactory.projectDetailWindowController()
+            projectDetailWindowController?.window?.title = projectInfo.projectName
             
             if let detailVC = projectDetailWindowController?.contentViewController as? ProjectDetailViewController {
                 detailVC.projectInfo = projectInfo
             }
             
-            projectDetailWindowController?.showWindow(nil)
+            projectDetailWindowController?.showWindow(self)
         }
     }
 }
