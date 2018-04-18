@@ -33,6 +33,7 @@
 		ADEA6027208720B600353795 /* AddDependencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEA6025208720B600353795 /* AddDependencyViewController.swift */; };
 		ADEA6028208720B600353795 /* AddDependencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADEA6026208720B600353795 /* AddDependencyViewController.xib */; };
 		ADEA602A20873D5D00353795 /* EditDependencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEA602920873D5D00353795 /* EditDependencyViewController.swift */; };
+		ADEA602C20876AC600353795 /* PodfileAnalyser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEA602B20876AC600353795 /* PodfileAnalyser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		ADEA6025208720B600353795 /* AddDependencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDependencyViewController.swift; sourceTree = "<group>"; };
 		ADEA6026208720B600353795 /* AddDependencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddDependencyViewController.xib; sourceTree = "<group>"; };
 		ADEA602920873D5D00353795 /* EditDependencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDependencyViewController.swift; sourceTree = "<group>"; };
+		ADEA602B20876AC600353795 /* PodfileAnalyser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodfileAnalyser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 			children = (
 				AD4F896C20847F9B00DF1FD5 /* ProjectDetailDataController.swift */,
 				ADDBB6982085FCDA00A020CA /* ProjectDetailCellConfigurator.swift */,
+				ADEA602B20876AC600353795 /* PodfileAnalyser.swift */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				AD4E755D2074FE4D00205D4C /* ProjectInfo.swift in Sources */,
 				AD4F896D20847F9B00DF1FD5 /* ProjectDetailDataController.swift in Sources */,
 				AD02C317206D068100CC9915 /* AddProjectViewController.swift in Sources */,
+				ADEA602C20876AC600353795 /* PodfileAnalyser.swift in Sources */,
 				AD8F5282207895B800128029 /* CommandExecutor.swift in Sources */,
 				ADDBB6992085FCDA00A020CA /* ProjectDetailCellConfigurator.swift in Sources */,
 				AD4E75612075006300205D4C /* ProjectInfoCellConfigurator.swift in Sources */,

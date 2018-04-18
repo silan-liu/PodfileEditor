@@ -17,7 +17,7 @@ class ProjectListDataController: NSObject {
         // test
         projectList = [ProjectInfo]()
         
-        let info1 = ProjectInfo(projectPath: "~/Documents/test1", projectName: "test1")
+        let info1 = ProjectInfo(projectPath: "/Users/liusilan/Documents/workspace/douyu/project/douyu-iOS", projectName: "test1")
         let info2 = ProjectInfo(projectPath: "~/Documents/test2", projectName: "test2")
         
         projectList?.append(info1)

@@ -139,6 +139,8 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
     func parsePodfile() {
         if let projectInfo = projectInfo {
             print("projectInfo:\(projectInfo.projectPath)")
+            dataController.projectInfo = projectInfo
+            dataController.analyze()
         }
     }
     

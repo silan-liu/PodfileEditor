@@ -18,6 +18,19 @@ class ProjectDetailDataController: NSObject {
     // podfile.lock中的依赖
     var allDenpencyList: [DependencyInfo]?
     
+    lazy var podfileAnalyser: PodfileAnalyser? = {
+        
+        if let path = projectInfo?.projectPath {
+            let podfilePath = path + "/Podfile"
+        
+            let analyser = PodfileAnalyser(path: podfilePath)
+            
+            return analyser
+        }
+        
+        return nil
+    }()
+    
     init(projectInfo: ProjectInfo?) {
         super.init()
         self.projectInfo = projectInfo
@@ -72,5 +85,9 @@ class ProjectDetailDataController: NSObject {
         }
         
         return nil
+    }
+    
+    func analyze() {
+        podfileAnalyser?.analyze()
     }
 }
