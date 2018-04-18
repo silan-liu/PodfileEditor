@@ -36,8 +36,6 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
         // Do view setup here.
         
         setupTableView();
-        
-        
     }
     
     //MARK: UI
@@ -116,6 +114,15 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
         self.textView.string = ""
     }
     
+    @IBAction func addDependecny(_ sender: Any) {
+        let vc = UIFactory.addDependencyViewController()
+        self.presentViewControllerAsSheet(vc)
+    }
+    
+    @IBAction func refreshDependency(_ sender: Any) {
+    }
+    
+    //MARK：func
     // 更新命令输出
     func updateCommandOutput(output: String) {
         DispatchQueue.main.async {

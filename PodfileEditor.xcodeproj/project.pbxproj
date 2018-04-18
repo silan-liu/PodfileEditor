@@ -30,6 +30,8 @@
 		ADE1F18E206CDE52007D89AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADE1F18D206CDE52007D89AA /* Assets.xcassets */; };
 		ADE1F194206CEBFE007D89AA /* ProjectDetailWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1F193206CEBFE007D89AA /* ProjectDetailWindowController.swift */; };
 		ADE1F196206CEC15007D89AA /* ProjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1F195206CEC15007D89AA /* ProjectDetailViewController.swift */; };
+		ADEA6027208720B600353795 /* AddDependencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEA6025208720B600353795 /* AddDependencyViewController.swift */; };
+		ADEA6028208720B600353795 /* AddDependencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADEA6026208720B600353795 /* AddDependencyViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +61,8 @@
 		ADE1F18D206CDE52007D89AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ADE1F193206CEBFE007D89AA /* ProjectDetailWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailWindowController.swift; sourceTree = "<group>"; };
 		ADE1F195206CEC15007D89AA /* ProjectDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewController.swift; sourceTree = "<group>"; };
+		ADEA6025208720B600353795 /* AddDependencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDependencyViewController.swift; sourceTree = "<group>"; };
+		ADEA6026208720B600353795 /* AddDependencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddDependencyViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,10 +119,9 @@
 		AD02C31D206D10DE00CC9915 /* ProjectDetail */ = {
 			isa = PBXGroup;
 			children = (
-				ADDBB6932085E46600A020CA /* Model */,
-				ADDBB68E2085D00400A020CA /* View */,
-				AD4F896B20847F7F00DF1FD5 /* DataController */,
-				AD4F896A20847F7200DF1FD5 /* ViewController */,
+				ADEA60242087208200353795 /* EditDependency */,
+				ADEA60232087207700353795 /* AddDependency */,
+				ADEA60222087206E00353795 /* DependencyList */,
 			);
 			path = ProjectDetail;
 			sourceTree = "<group>";
@@ -240,6 +243,33 @@
 			path = PodfileEditor;
 			sourceTree = "<group>";
 		};
+		ADEA60222087206E00353795 /* DependencyList */ = {
+			isa = PBXGroup;
+			children = (
+				ADDBB6932085E46600A020CA /* Model */,
+				ADDBB68E2085D00400A020CA /* View */,
+				AD4F896B20847F7F00DF1FD5 /* DataController */,
+				AD4F896A20847F7200DF1FD5 /* ViewController */,
+			);
+			path = DependencyList;
+			sourceTree = "<group>";
+		};
+		ADEA60232087207700353795 /* AddDependency */ = {
+			isa = PBXGroup;
+			children = (
+				ADEA6025208720B600353795 /* AddDependencyViewController.swift */,
+				ADEA6026208720B600353795 /* AddDependencyViewController.xib */,
+			);
+			path = AddDependency;
+			sourceTree = "<group>";
+		};
+		ADEA60242087208200353795 /* EditDependency */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = EditDependency;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -309,6 +339,7 @@
 				ADE1F18E206CDE52007D89AA /* Assets.xcassets in Resources */,
 				AD34F14C2075D37000BBD802 /* AddProjectViewController.xib in Resources */,
 				ADE1F181206CCE6A007D89AA /* Main.storyboard in Resources */,
+				ADEA6028208720B600353795 /* AddDependencyViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +366,7 @@
 				ADE1F17C206CCE6A007D89AA /* ProjectListViewController.swift in Sources */,
 				AD4E755F2074FE8300205D4C /* ProjectListDataController.swift in Sources */,
 				ADE1F18A206CD7AF007D89AA /* ProjectInfoCellView.swift in Sources */,
+				ADEA6027208720B600353795 /* AddDependencyViewController.swift in Sources */,
 				AD4E756520750ECB00205D4C /* EditProjectViewController.swift in Sources */,
 				ADE1F17A206CCE6A007D89AA /* AppDelegate.swift in Sources */,
 			);

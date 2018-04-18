@@ -28,7 +28,9 @@ class UIFactory: NSObject {
         return storyboard
     }
     
-//    static func editProjectViewController() -> EditProjectViewController {
-//        return EditProjectViewController()
-//    }
+    static func addDependencyViewController() -> AddDependencyViewController {
+        let vc = AddDependencyViewController(nibName: NSNib.Name("AddDependencyViewController"), bundle: nil)
+        
+        return vc
+    }
 }
