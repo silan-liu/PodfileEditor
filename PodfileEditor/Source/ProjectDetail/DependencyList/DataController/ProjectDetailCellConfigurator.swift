@@ -10,8 +10,11 @@ import Cocoa
 
 class ProjectDetailCellConfigurator: NSObject {
     func configCell(cell: NSTableCellView, info: DependencyInfo, index: Int) {
-        if let value = valueAtIndex(index: index, info: info) {
-            cell.textField?.stringValue = value
+        let value = valueAtIndex(index: index, info: info)
+        if let value = value {
+            cell.textField?.stringValue = !value.isEmpty ? value : "None"
+        } else {
+            cell.textField?.stringValue = "None"
         }
     }
     
@@ -19,8 +22,11 @@ class ProjectDetailCellConfigurator: NSObject {
         switch index {
         case 0:
             return info.name
+            
         case 1:
-            return info.git
+            let version = versionInfo(info: info)
+            return version
+            
         case 2:
             return info.config
 
@@ -29,6 +35,17 @@ class ProjectDetailCellConfigurator: NSObject {
 
         default:
             return nil
+        }
+    }
+    
+    func versionInfo(info: DependencyInfo) -> String? {
+        switch info.type {
+        case SourceType.Version:
+            return info.version
+        case SourceType.Path:
+            return info.path
+        case SourceType.Git:
+            return info.git
         }
     }
 }

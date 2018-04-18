@@ -32,6 +32,7 @@
 		ADE1F196206CEC15007D89AA /* ProjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1F195206CEC15007D89AA /* ProjectDetailViewController.swift */; };
 		ADEA6027208720B600353795 /* AddDependencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEA6025208720B600353795 /* AddDependencyViewController.swift */; };
 		ADEA6028208720B600353795 /* AddDependencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADEA6026208720B600353795 /* AddDependencyViewController.xib */; };
+		ADEA602A20873D5D00353795 /* EditDependencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEA602920873D5D00353795 /* EditDependencyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		ADE1F195206CEC15007D89AA /* ProjectDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewController.swift; sourceTree = "<group>"; };
 		ADEA6025208720B600353795 /* AddDependencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDependencyViewController.swift; sourceTree = "<group>"; };
 		ADEA6026208720B600353795 /* AddDependencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddDependencyViewController.xib; sourceTree = "<group>"; };
+		ADEA602920873D5D00353795 /* EditDependencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDependencyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,6 +268,7 @@
 		ADEA60242087208200353795 /* EditDependency */ = {
 			isa = PBXGroup;
 			children = (
+				ADEA602920873D5D00353795 /* EditDependencyViewController.swift */,
 			);
 			path = EditDependency;
 			sourceTree = "<group>";
@@ -297,7 +300,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = summer;
 				TargetAttributes = {
 					ADE1F175206CCE6A007D89AA = {
@@ -359,6 +362,7 @@
 				AD8F5282207895B800128029 /* CommandExecutor.swift in Sources */,
 				ADDBB6992085FCDA00A020CA /* ProjectDetailCellConfigurator.swift in Sources */,
 				AD4E75612075006300205D4C /* ProjectInfoCellConfigurator.swift in Sources */,
+				ADEA602A20873D5D00353795 /* EditDependencyViewController.swift in Sources */,
 				ADE1F194206CEBFE007D89AA /* ProjectDetailWindowController.swift in Sources */,
 				ADDBB6972085E50400A020CA /* DependencyInfo.swift in Sources */,
 				AD02C315206D02CF00CC9915 /* Windows.swift in Sources */,
@@ -400,6 +404,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -407,6 +412,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -457,6 +463,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -464,6 +471,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

@@ -8,25 +8,25 @@
 
 import Foundation
 
-enum VersionRequirement {
+enum VersionRequirement: Int {
+    
+    // "=="
+    case Equal = 0
     
     // "~>"
     case Compatible
     
-    // "=="
-    case Equal
+    // ">="
+    case GreaterThanOrEqual
     
     // ">"
     case GreaterThan
     
-    // ">="
-    case GreaterThanOrEqual
+    // "<="
+    case LessThanOrEqual
     
     // "<"
     case LessThan
-    
-    // "<="
-    case LessThanOrEqual
     
     func description() -> String {
         switch self {
@@ -51,23 +51,42 @@ enum VersionRequirement {
     }
 }
 
+enum SourceType: Int {
+    case Version
+    case Git
+    case Path
+}
+
 enum GitPointType {
+    case None
     case Branch
     case Commit
     case Tag
 }
 
+enum Configauration: Int {
+    case None
+    case Debug
+    case Release
+}
+
 struct DependencyInfo {
     var name: String
     
+    var type: SourceType = SourceType.Version
+
     // 版本号
     var version: String?
     
     // 版本号限制
     var versionRequirement: VersionRequirement?
-
+    
     // 指向git时，可能出现的选项
     var git: String?
+    var gitType: GitPointType = .None
+    
+    // branch/commit/tag
+    var gitDescription: String?
     
     var branch: String?
     var commit: String?
@@ -79,6 +98,18 @@ struct DependencyInfo {
     // configuration
     var config: String?
     
+    var configIndex: Configauration  {
+        if config == "" || config == "None" {
+            return .None
+        } else if config == "Debug" || config == "debug" {
+            return .Debug
+        } else if config == "Relase" || config == "release" {
+            return .Release
+        }
+        
+        return .None
+    }
+    
     var subspecs:[String]?
     
     init(name: String, version: String, versionRequirement: VersionRequirement = VersionRequirement.Equal, config: String? = nil, subspecs: [String]? = nil) {
@@ -87,6 +118,7 @@ struct DependencyInfo {
         self.versionRequirement = versionRequirement
         self.config = config
         self.subspecs = subspecs
+        self.type = SourceType.Version
     }
     
     init(name: String, path: String, config: String? = nil, subspecs: [String]? = nil) {
@@ -94,6 +126,7 @@ struct DependencyInfo {
         self.path = path
         self.config = config
         self.subspecs = subspecs
+        self.type = SourceType.Path
     }
     
     init(name: String, git: String, config: String? = nil, subspecs: [String]? = nil) {
@@ -101,6 +134,7 @@ struct DependencyInfo {
         self.git = git
         self.config = config
         self.subspecs = subspecs
+        self.type = SourceType.Git
     }
     
     init(name: String, git: String, branch: String? = nil, config: String? = nil, subspecs: [String]? = nil) {
@@ -109,6 +143,7 @@ struct DependencyInfo {
         self.branch = branch
         self.config = config
         self.subspecs = subspecs
+        self.type = SourceType.Git
     }
     
     init(name: String, git: String, commit: String, config: String? = nil, subspecs: [String]? = nil) {
@@ -117,6 +152,7 @@ struct DependencyInfo {
         self.commit = commit
         self.config = config
         self.subspecs = subspecs
+        self.type = SourceType.Git
     }
     
     init(name: String, git: String, tag: String, config: String? = nil, subspecs: [String]? = nil) {
@@ -125,5 +161,15 @@ struct DependencyInfo {
         self.tag = tag
         self.config = config
         self.subspecs = subspecs
+        self.type = SourceType.Git
+    }
+    
+    init(name: String, git: String, gitDescription: String? = nil, config: String? = nil, subspecs: [String]? = nil) {
+        self.name = name
+        self.git = git
+        self.gitDescription = gitDescription
+        self.config = config
+        self.subspecs = subspecs
+        self.type = SourceType.Git
     }
 }

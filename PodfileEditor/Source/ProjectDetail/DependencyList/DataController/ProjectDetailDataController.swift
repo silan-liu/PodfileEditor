@@ -24,11 +24,11 @@ class ProjectDetailDataController: NSObject {
         
         var dependencyList = [DependencyInfo]()
         
-        let dep1 = DependencyInfo(name: "lib1", git: "http://gitlbab.lib1", branch: "master")
+        let dep1 = DependencyInfo(name: "lib1", git: "http://gitlbab.lib1", gitDescription: "master")
         let dep2 = DependencyInfo(name: "lib2", git: "http://gitlbab.lib2")
-        let dep3 = DependencyInfo(name: "lib3", git: "http://gitlbab.lib2", tag: "0.0.1")
+        let dep3 = DependencyInfo(name: "lib3", git: "http://gitlbab.lib2", gitDescription: "0.0.1")
         let dep4 = DependencyInfo(name: "lib4", version: "9.0.2")
-        let dep5 = DependencyInfo(name: "lib5", git: "http://gitlab.lib5", branch: "dev", config: "debug", subspecs: ["subspec"])
+        let dep5 = DependencyInfo(name: "lib5", git: "http://gitlab.lib5", gitDescription: "dev", config: "debug", subspecs: ["subspec"])
         
         dependencyList.append(dep1)
         dependencyList.append(dep2)
@@ -47,6 +47,12 @@ class ProjectDetailDataController: NSObject {
 
         if (row >= 0 && row < numberOfRows()) {
             dependencyList?.remove(at: row)
+        }
+    }
+    
+    func editDependency(at row: Int, dep: DependencyInfo) {
+        if (row >= 0 && row < numberOfRows()) {
+            dependencyList?[row] = dep
         }
     }
     

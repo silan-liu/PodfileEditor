@@ -114,8 +114,12 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
         self.textView.string = ""
     }
     
-    @IBAction func addDependecny(_ sender: Any) {
+    @IBAction func addDependencyAction(_ sender: Any) {
         let vc = UIFactory.addDependencyViewController()
+        vc.completion = { [unowned self] dep in
+            self.addDependency(dep: dep)
+        }
+        
         self.presentViewControllerAsSheet(vc)
     }
     
@@ -140,12 +144,26 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
     
     // 修改依赖
     func editDependency(at row: Int) {
-        
+        if let dependency = dataController.dependencyInfo(at: row) {
+            let vc = EditDependencyViewController(dep: dependency)
+            vc.completion = { [unowned self] dep in
+                self.dataController.editDependency(at: row, dep: dep)
+                self.tableView.reloadData()
+            }
+            
+            self.presentViewControllerAsSheet(vc)
+        }
     }
     
     // 删除依赖
     func deleteDependency(at row: Int) {
         dataController.deleteDependency(at: row)
+        tableView.reloadData()
+    }
+    
+    // 添加依赖
+    func addDependency(dep: DependencyInfo) {
+        dataController.addDependency(dep: dep)
         tableView.reloadData()
     }
     
