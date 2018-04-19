@@ -19,7 +19,6 @@ class PodfileAnalyser {
         print("begin analyze")
         do {
             var content = try String(contentsOf: URL(fileURLWithPath: podfilePath))
-            content = content.trimmingCharacters(in: .whitespacesAndNewlines)
             content = content.replacingOccurrences(of: " ", with: "")
             
             let lines = content.components(separatedBy: .newlines)
