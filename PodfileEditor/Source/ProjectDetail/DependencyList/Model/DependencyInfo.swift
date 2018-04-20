@@ -112,6 +112,10 @@ struct DependencyInfo {
     
     var subspecs:[String]?
     
+    init(name: String) {
+        self.name = name
+    }
+    
     init(name: String, version: String, versionRequirement: VersionRequirement = VersionRequirement.Equal, config: String? = nil, subspecs: [String]? = nil) {
         self.name = name
         self.version = version
