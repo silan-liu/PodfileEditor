@@ -44,6 +44,8 @@ class ProjectDetailCellConfigurator: NSObject {
             return info.version
         case SourceType.Path:
             return info.path
+        case SourceType.Podspec:
+            return info.podspec
         case SourceType.Git:
             if let git = info.git {
                 var value = "git => " + git

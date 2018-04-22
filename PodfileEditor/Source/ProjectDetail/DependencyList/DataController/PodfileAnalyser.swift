@@ -41,61 +41,86 @@ class PodfileAnalyser {
                 }
                 
                 // 匹配name，支持'xx', "xx"
-                if let podName = regexMatch(pattern: "\\s*pod\\s*['\"]([\\w\\d/]*)['\"]", matchString: line) {
+                if let podName = regexMatch(pattern: "\\s*pod\\s*['\"](.*?)['\"]", matchString: line) {
                     print("libname: \(podName)")
                     
                     var info = DependencyInfo(name: podName)
                     
-                    // 匹配版本号
-                    if let version = regexMatch(pattern: "['\"](\\d*(\\.\\d*)+)['\"]", matchString: line) {
-                        print("version: \(version)")
-                        info.version = version
+                    // 取版本号，以,分隔
+                    let list = trimmed.components(separatedBy: ",")
+                    if list.count > 1 {
+                        // 取第二个元素
+                        var versionString = list[1]
                         
-                    } else if let gitUrl = regexMatch(pattern: ":git\\s*=>\\s*['\"](.*?['\"])", matchString: line) {
-                        // 匹配git
-                        let url = trimQuotation(string: gitUrl)
-                        print("url:\(url)")
-                        
-                        info.git = url
-                        
-                        // 匹配branch
-                        if let result = regexMatch(pattern: ":branch\\s*=>\\s*['\"](.*?['\"])", matchString: line) {
-                            let branch = trimQuotation(string: result)
-                            print("branch:\(branch)")
+                        if versionString.hasPrefix("'") || versionString.hasPrefix("\"") {
                             
-                            info.branch = branch
-                        }
-                        
-                        // 匹配commit
-                        if let result = regexMatch(pattern: ":commit\\s*=>\\s*['\"](.*?['\"])", matchString: line) {
-                            let commit = trimQuotation(string: result)
-                            print("commit:\(commit)")
+                            versionString = trimQuotation(string: versionString)
+
+                            let tmp = extractVersion(versionDesc: versionString)
+                            print("versionRequirement:\(tmp.0), version: \(tmp.1)")
+
+                            info.versionRequirement = tmp.0
+                            info.version = tmp.1
+                            info.type = .Version
                             
-                            info.commit = commit
-                        }
-                        
-                        // tag
-                        if let result = regexMatch(pattern: ":tag\\s*=>\\s*['\"](.*?['\"])", matchString: line) {
-                            let tag = trimQuotation(string: result)
-                            print("commit:\(tag)")
+                        } else if let url = regexMatch(pattern: ":git\\s*=>\\s*['\"](.*?)['\"]", matchString: line) {
+                            // 匹配git
+                            print("url:\(url)")
                             
-                            info.tag = tag
+                            info.git = url
+                            info.type = .Git
+                            
+                            // 匹配branch
+                            if let branch = regexMatch(pattern: ":branch\\s*=>\\s*['\"](.*?)['\"]", matchString: line) {
+                                print("branch:\(branch)")
+                                
+                                info.gitDescription = branch
+                            }
+                            // 匹配commit
+                            else if let commit = regexMatch(pattern: ":commit\\s*=>\\s*['\"](.*?)['\"]", matchString: line) {
+                                print("commit:\(commit)")
+                                
+                                info.gitDescription = commit
+                            }
+                            // tag
+                            else if let tag = regexMatch(pattern: ":tag\\s*=>\\s*['\"](.*?)['\"]", matchString: line) {
+                                print("commit:\(tag)")
+                                
+                                info.gitDescription = tag
+                            }
+                            
+                        } else if let path = regexMatch(pattern: ":path\\s*=>\\s*['\"](.*?)['\"]", matchString: line) {
+                            // 匹配path
+                            print("path:\(path)")
+                            
+                            info.path = path
+                            info.type = .Path
+                            
+                        } else if let podspec = regexMatch(pattern: ":podspec\\s*=>\\s*['\"](.*?)['\"]", matchString: line) {
+                            // 匹配podspec
+                            print("podspec:\(podspec)")
+                            
+                            info.podspec = podspec
+                            info.type = .Podspec
                         }
-                        
-                    } else if let path = regexMatch(pattern: ":path\\s*=>\\s*['\"](.*?['\"])", matchString: line) {
-                        // 匹配path
-                        let path = trimQuotation(string: path)
-                        print("path:\(path)")
-                        
-                        info.path = path
                     }
                     
                     // 匹配configuration
-                    if let result = regexMatch(pattern: ":configuration\\s*=>\\s*['\"](.*?['\"])", matchString: line) {
-                        let configuration = trimQuotation(string: result)
-                        print("configuration:\(configuration)")
+                    // :configuration => 'Debug'
+                    if let result = regexMatch(pattern: ":configuration\\s*=>\\s*['\"](.*?)['\"]", matchString: line) {
+                        print("configuration:\(result)")
                         
-                        info.config = configuration
+                        info.config = result
+                    }
+                    // :configurations => ['Debug']
+                    else if let result = regexMatch(pattern: ":configurations\\s*=>\\s*\\[(.*)\\]", matchString: line) {
+                        let configurations = parseSubspecs(subspecs: result)
+                        
+                        // 目前只支持一种config
+                        if configurations.count > 1 {
+                            info.config = configurations[0]
+                        }
+                        print("configurations:\(configurations)")
                     }
                     
                     // 匹配subspecs
@@ -119,7 +144,7 @@ class PodfileAnalyser {
                         }
                     }
                     
-                    print("=============")
+                    print("=============\(info)")
                 } else if let result = regexMatch(pattern: "\\s*target\\s*['\"]([\\w\\d]+)['\"]", matchString: line) {
                     print("target: \(result)")
                     
@@ -200,5 +225,40 @@ class PodfileAnalyser {
         }
         
         return rightTarget
+    }
+    
+    
+    /// 将version转换成版本(限制符, 版本号)形式，如将"~> 1.0.1" -> (.Compatible, 1.0.1)
+    ///
+    /// - Parameter version: 完整版本号描述
+    /// - Returns: (限制符, 版本号)
+    func extractVersion(versionDesc: String) -> (VersionRequirement, String) {
+        let trimmed = versionDesc.replacingOccurrences(of: " ", with: "")
+        var versionRequirementString = "=="
+        var versionRequirement = VersionRequirement.Equal
+        
+        if trimmed.hasPrefix("~>") {
+            versionRequirementString = "~>"
+            versionRequirement = VersionRequirement.Compatible
+            
+        } else if trimmed.hasPrefix(">") {
+            versionRequirementString = ">"
+            versionRequirement = VersionRequirement.GreaterThan
+            
+        } else if trimmed.hasPrefix(">=") {
+            versionRequirementString = ">="
+            versionRequirement = VersionRequirement.GreaterThanOrEqual
+            
+        } else if trimmed.hasPrefix("<") {
+            versionRequirementString = "<"
+            versionRequirement = VersionRequirement.LessThan
+            
+        } else if trimmed.hasPrefix("<=") {
+            versionRequirementString = "<="
+            versionRequirement = VersionRequirement.LessThanOrEqual
+        }
+        
+        let verison = trimmed.replacingOccurrences(of: versionRequirementString, with: "")
+        return (versionRequirement, verison)
     }
 }

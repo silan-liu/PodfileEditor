@@ -107,7 +107,7 @@ class ProjectListViewController: NSViewController, NSTableViewDelegate, NSTableV
         
         if let projectInfo = projectListDataController.projectInfoAtRow(row: row) {
             // 进入详情页
-            let projectDetailWindowController = UIFactory.projectDetailWindowController()
+            projectDetailWindowController = UIFactory.projectDetailWindowController()
             projectDetailWindowController?.window?.title = projectInfo.projectName
             
             if let detailVC = projectDetailWindowController?.contentViewController as? ProjectDetailViewController {

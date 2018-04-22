@@ -55,13 +55,7 @@ enum SourceType: Int {
     case Version
     case Git
     case Path
-}
-
-enum GitPointType {
-    case None
-    case Branch
-    case Commit
-    case Tag
+    case Podspec
 }
 
 enum Configauration: Int {
@@ -83,17 +77,15 @@ struct DependencyInfo {
     
     // 指向git时，可能出现的选项
     var git: String?
-    var gitType: GitPointType = .None
     
     // branch/commit/tag
     var gitDescription: String?
-    
-    var branch: String?
-    var commit: String?
-    var tag: String?
 
     // 指向本地路径
     var path: String?
+    
+    // 指向podspc
+    var podspec: String?
     
     // configuration
     var config: String?
@@ -133,36 +125,17 @@ struct DependencyInfo {
         self.type = SourceType.Path
     }
     
+    init(name: String, podspec: String, config: String? = nil, subspecs: [String]? = nil) {
+        self.name = name
+        self.podspec = podspec
+        self.config = config
+        self.subspecs = subspecs
+        self.type = SourceType.Podspec
+    }
+    
     init(name: String, git: String, config: String? = nil, subspecs: [String]? = nil) {
         self.name = name
         self.git = git
-        self.config = config
-        self.subspecs = subspecs
-        self.type = SourceType.Git
-    }
-    
-    init(name: String, git: String, branch: String? = nil, config: String? = nil, subspecs: [String]? = nil) {
-        self.name = name
-        self.git = git
-        self.branch = branch
-        self.config = config
-        self.subspecs = subspecs
-        self.type = SourceType.Git
-    }
-    
-    init(name: String, git: String, commit: String, config: String? = nil, subspecs: [String]? = nil) {
-        self.name = name
-        self.git = git
-        self.commit = commit
-        self.config = config
-        self.subspecs = subspecs
-        self.type = SourceType.Git
-    }
-    
-    init(name: String, git: String, tag: String, config: String? = nil, subspecs: [String]? = nil) {
-        self.name = name
-        self.git = git
-        self.tag = tag
         self.config = config
         self.subspecs = subspecs
         self.type = SourceType.Git

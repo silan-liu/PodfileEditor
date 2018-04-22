@@ -19,9 +19,12 @@ class ProjectListDataController: NSObject {
         
         let info1 = ProjectInfo(projectPath: "/Users/liusilan/Documents/workspace/douyu/project/douyu-iOS", projectName: "douyu")
         let info2 = ProjectInfo(projectPath: "/Users/liusilan/Documents/workspace/douyu/project/DYLiveRoomComponent/Example", projectName: "DYLiveRoomComponent")
-        
+        let info3 = ProjectInfo(projectPath: "/Users/liusilan/Documents/workspace/yy/ios-trunk", projectName: "YY")
+
         projectList?.append(info1)
         projectList?.append(info2)
+        projectList?.append(info3)
+
     }
     
     func numberOfRows() -> Int {
