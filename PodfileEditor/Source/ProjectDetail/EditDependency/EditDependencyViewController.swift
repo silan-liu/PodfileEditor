@@ -51,7 +51,21 @@ class EditDependencyViewController: AddDependencyViewController {
             }
             
             configPopUpButton.selectItem(at: dependencyInfo.configIndex.rawValue)
-            subspecTextField.stringValue = dependencyInfo.subspecs?.formateString(",") ?? ""
+            
+            if let subspecs = dependencyInfo.subspecs {
+                subspecTextField.stringValue = PodfileUtils.subspecsToString(subspecs: subspecs)
+            } else {
+                subspecTextField.stringValue = ""
+            }
         }
+    }
+    
+    override  func beforeDismissAction(dep: DependencyInfo) {
+        if dep == dependencyInfo {
+            print("Dependency No Changes")
+            return
+        }
+        
+        super.beforeDismissAction(dep: dep)
     }
 }

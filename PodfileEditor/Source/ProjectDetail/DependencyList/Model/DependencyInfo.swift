@@ -70,7 +70,7 @@ enum Configauration: Int {
     case Release
 }
 
-struct DependencyInfo {
+struct DependencyInfo: Equatable {
     var name: String
     
     var type: SourceType = SourceType.Version
@@ -207,5 +207,58 @@ struct DependencyInfo {
         }
         
         return ""
+    }
+    
+    static func ==(lhs: DependencyInfo, rhs: DependencyInfo) -> Bool {
+        
+        if lhs.name != lhs.name {
+            return false
+        }
+        
+        if lhs.type != rhs.type {
+            return false
+        }
+        
+        if lhs.version != rhs.version {
+            return false
+        }
+        
+        if lhs.versionRequirement != rhs.versionRequirement {
+            return false
+        }
+        
+        if lhs.gitUrl != rhs.gitUrl {
+            return false
+        }
+        
+        if lhs.gitType != rhs.gitType {
+            return false
+        }
+        
+        if lhs.gitDescription != rhs.gitDescription {
+            return false
+        }
+        
+        if lhs.path != rhs.path {
+            return false
+        }
+        
+        if lhs.podspec != rhs.podspec {
+            return false
+        }
+        
+        if lhs.config != rhs.config {
+            return false
+        }
+        
+        if (lhs.subspecs != nil && rhs.subspecs == nil) || (lhs.subspecs == nil && rhs.subspecs != nil) {
+            return false
+        }
+        
+        if let lSubspecs = lhs.subspecs, let rSubspecs = rhs.subspecs, PodfileUtils.subspecsToString(subspecs: lSubspecs) != PodfileUtils.subspecsToString(subspecs: rSubspecs) {
+            return false
+        }
+        
+        return true
     }
 }

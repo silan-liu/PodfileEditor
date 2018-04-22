@@ -182,7 +182,7 @@ class PodfileAnalyser {
                 contentArray[line] = dep.toString()
                 dependencyMap[line] = dep
                 
-                print("edit sucess")
+                print("edit success")
             } catch let error as NSError {
                 print("saveFile Error:\(error)")
             }

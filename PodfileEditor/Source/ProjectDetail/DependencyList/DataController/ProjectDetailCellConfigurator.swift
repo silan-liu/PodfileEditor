@@ -31,7 +31,11 @@ class ProjectDetailCellConfigurator: NSObject {
             return info.config
 
         case 3:
-            return info.subspecs?.formateString(",")
+            if let subspecs = info.subspecs {
+                return PodfileUtils.subspecsToString(subspecs: subspecs)
+            }
+            
+            return nil
 
         default:
             return nil

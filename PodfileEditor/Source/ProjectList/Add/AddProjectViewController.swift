@@ -30,6 +30,13 @@ class AddProjectViewController: NSViewController {
         // Do view setup here.
     }
     
+    // confirm消失之前操作
+    func beforeDismissAction(name: String, path: String) {
+        if let chooseCompletion = chooseCompletion {
+            chooseCompletion(name, path)
+        }
+    }
+    
     // MARK: action
     @IBAction func cancleAction(_ sender: Any) {
         self.dismiss(nil)
@@ -40,9 +47,7 @@ class AddProjectViewController: NSViewController {
         if self.checkInput() {
             self.dismiss(nil)
             
-            if let chooseCompletion = chooseCompletion {
-                chooseCompletion(projectNameTextField.stringValue, pathTextField.stringValue)
-            }
+            beforeDismissAction(name: projectNameTextField.stringValue, path: pathTextField.stringValue)
         }
     }
 

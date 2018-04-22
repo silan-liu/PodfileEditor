@@ -31,4 +31,12 @@ class EditProjectViewController: AddProjectViewController {
         self.pathTextField.stringValue = projectInfo.projectPath
     }
     
+    override func beforeDismissAction(name: String, path: String) {
+        if name == projectInfo.projectName && path == projectInfo.projectPath {
+            print("Project No Changes")
+            return
+        }
+        
+        super.beforeDismissAction(name: name, path: path)
+    }
 }

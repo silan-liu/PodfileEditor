@@ -54,6 +54,13 @@ class AddDependencyViewController: NSViewController {
         gitTypePopUpButton.isHidden = !show
     }
     
+    // confirm消失之前操作
+    func beforeDismissAction(dep: DependencyInfo) {
+        if let completion = completion {
+            completion(dep)
+        }
+    }
+    
     //MARK: Action
     @IBAction func chooseType(_ sender: Any) {
         let popupButton = sender as! NSPopUpButton
@@ -144,9 +151,8 @@ class AddDependencyViewController: NSViewController {
         
         if let dep = dep {
             print("dep: \(dep)")
-            if let completion = completion {
-                completion(dep)
-            }
+            
+            beforeDismissAction(dep: dep)
         }
         
         self.dismiss(nil)
