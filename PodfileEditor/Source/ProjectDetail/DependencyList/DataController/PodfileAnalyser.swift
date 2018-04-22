@@ -27,6 +27,7 @@ class PodfileAnalyser {
         podfilePath = path
     }
 
+    //MARK: Analyze
     func analyze() {
         print("begin analyze")
         
@@ -120,45 +121,6 @@ class PodfileAnalyser {
         
         return true
     }
-    
-    /// 进行正则匹配，返回group 1
-    func regexMatchGroup(pattern: String, matchString: String) -> String? {
-        return regexMatch(pattern: pattern, matchString: matchString, index: 1)
-    }
-    
-    
-    /// 正则匹配，返回全部匹配的字符串
-    func regexMatchFull(pattern: String, matchString: String) -> String? {
-        return regexMatch(pattern: pattern, matchString: matchString, index: 0)
-    }
-    
-    
-    /// 正则匹配
-    ///
-    /// - Parameters:
-    ///   - pattern: 正则表达式
-    ///   - matchString: 待匹配字符串
-    ///   - index: 匹配的index
-    /// - Returns: 匹配字符串
-    func regexMatch(pattern: String, matchString: String, index: Int) -> String? {
-        do {
-            let regularExp = try NSRegularExpression(pattern: pattern, options: [])
-            
-            if let match = regularExp.firstMatch(in: matchString, options: [], range: NSRange(location: 0, length: matchString.count)) {
-                // 0表示匹配到的整个部分
-                if match.numberOfRanges > index {
-                    let range = match.range(at: index)
-                    let result = (matchString as NSString).substring(with: range)
-                    return result
-                }
-            }
-        } catch let error as NSError {
-            print("regexMatch error: \(error)")
-        }
-        
-        return nil
-    }
-    
     
     /// 找到podFile中定义的方法
     ///
@@ -340,6 +302,45 @@ class PodfileAnalyser {
     }
     
     //MARK:Helper
+    
+    /// 进行正则匹配，返回group 1
+    func regexMatchGroup(pattern: String, matchString: String) -> String? {
+        return regexMatch(pattern: pattern, matchString: matchString, index: 1)
+    }
+    
+    
+    /// 正则匹配，返回全部匹配的字符串
+    func regexMatchFull(pattern: String, matchString: String) -> String? {
+        return regexMatch(pattern: pattern, matchString: matchString, index: 0)
+    }
+    
+    
+    /// 正则匹配
+    ///
+    /// - Parameters:
+    ///   - pattern: 正则表达式
+    ///   - matchString: 待匹配字符串
+    ///   - index: 匹配的index
+    /// - Returns: 匹配字符串
+    func regexMatch(pattern: String, matchString: String, index: Int) -> String? {
+        do {
+            let regularExp = try NSRegularExpression(pattern: pattern, options: [])
+            
+            if let match = regularExp.firstMatch(in: matchString, options: [], range: NSRange(location: 0, length: matchString.count)) {
+                // 0表示匹配到的整个部分
+                if match.numberOfRanges > index {
+                    let range = match.range(at: index)
+                    let result = (matchString as NSString).substring(with: range)
+                    return result
+                }
+            }
+        } catch let error as NSError {
+            print("regexMatch error: \(error)")
+        }
+        
+        return nil
+    }
+    
     // 去除引号, '/"
     func trimQuotation(string: String) -> String {
         var result = string.replacingOccurrences(of: "'", with: "")
@@ -364,23 +365,6 @@ class PodfileAnalyser {
         
         return result
     }
-    
-    // 根据pod所在行数找到对应的target，选择最近的target
-    func findTarget(index: Int) -> String {
-        var result = SSIZE_MAX
-        var rightTarget = ""
-        
-        for (line, target) in targetMap {
-            if (index > line && (index - line) < result) {
-                result = index - line
-                
-                rightTarget = target
-            }
-        }
-        
-        return rightTarget
-    }
-    
     
     /// 将version转换成版本(限制符, 版本号)形式，如将"~> 1.0.1" -> (.Compatible, 1.0.1)
     ///
