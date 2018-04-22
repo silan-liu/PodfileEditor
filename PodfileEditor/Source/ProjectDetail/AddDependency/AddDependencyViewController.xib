@@ -173,7 +173,7 @@ DQ
                     </connections>
                 </popUpButton>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dOr-uL-bAH">
-                    <rect key="frame" x="20" y="74" width="4" height="17"/>
+                    <rect key="frame" x="20" y="74" width="744" height="17"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="iTH-jH-kOH">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
@@ -263,6 +263,7 @@ DQ
             <constraints>
                 <constraint firstItem="dOr-uL-bAH" firstAttribute="leading" secondItem="crH-i6-YPh" secondAttribute="leading" id="1Ro-6S-j2Z"/>
                 <constraint firstItem="1Dq-B2-c24" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="1Vj-LR-gcm"/>
+                <constraint firstAttribute="trailing" secondItem="dOr-uL-bAH" secondAttribute="trailing" constant="20" id="43t-7d-sO9"/>
                 <constraint firstItem="crH-i6-YPh" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="22" id="5l2-6m-WuC"/>
                 <constraint firstItem="crH-i6-YPh" firstAttribute="top" secondItem="pgV-QX-Nu6" secondAttribute="bottom" constant="8" id="5ph-Kb-m52"/>
                 <constraint firstItem="cM3-WA-wEp" firstAttribute="top" secondItem="AxT-li-BNO" secondAttribute="bottom" constant="20" id="8P7-tT-r4L"/>
