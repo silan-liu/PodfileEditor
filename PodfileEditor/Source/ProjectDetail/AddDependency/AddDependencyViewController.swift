@@ -21,6 +21,8 @@ class AddDependencyViewController: NSViewController {
     @IBOutlet weak var configPopUpButton: NSPopUpButton!
     @IBOutlet weak var versionRequirementPopupButton: NSPopUpButton!
     @IBOutlet weak var errorLabel: NSTextField!
+    @IBOutlet weak var gitTypeLabel: NSTextField!
+    @IBOutlet weak var gitTypePopUpButton: NSPopUpButton!
     
     var completion: ((DependencyInfo) -> Void)? = nil
     
@@ -46,6 +48,12 @@ class AddDependencyViewController: NSViewController {
         versionRequirementPopupButton.isHidden = !show
     }
     
+    // 显示git type相关ui
+    func showGitTypeUI(show: Bool) {
+        gitTypeLabel.isHidden = !show
+        gitTypePopUpButton.isHidden = !show
+    }
+    
     //MARK: Action
     @IBAction func chooseType(_ sender: Any) {
         let popupButton = sender as! NSPopUpButton
@@ -55,21 +63,28 @@ class AddDependencyViewController: NSViewController {
             urlLabel.stringValue = "url"
             branchTextField.isEnabled = true
             showVersionRequirement(show: false)
+            showGitTypeUI(show: true)
+            
         } else if (tag == 2) {
             urlLabel.stringValue = "path"
 
             // textField不能输入
             branchTextField.isEnabled = false
             showVersionRequirement(show: false)
+            showGitTypeUI(show: false)
+
         } else if (tag == 0) {
             urlLabel.stringValue = "version (optional)"
             showVersionRequirement(show: true)
+            showGitTypeUI(show: false)
+
         } else if (tag == 3) {
             urlLabel.stringValue = "podspec"
             
             // textField不能输入
             branchTextField.isEnabled = false
             showVersionRequirement(show: false)
+            showGitTypeUI(show: false)
         }
     }
     
@@ -99,8 +114,15 @@ class AddDependencyViewController: NSViewController {
         let branch = branchTextField.stringValue
         let type = typePopupButton.indexOfSelectedItem
         let versionRequirement = versionRequirementPopupButton.indexOfSelectedItem
+        
         let configIndex = configPopUpButton.indexOfSelectedItem
-        let config = configPopUpButton.selectedItem?.title
+        var config = configPopUpButton.selectedItem?.title
+        
+        if configIndex == 0 {
+            config = nil
+        }
+
+        let gitType = gitTypePopUpButton.selectedItem?.title
         
         let subspecString = subspecTextField.stringValue
         let subspec = subspecs(string: subspecString)
@@ -111,7 +133,7 @@ class AddDependencyViewController: NSViewController {
             dep = DependencyInfo(name: name, version: url, versionRequirement: VersionRequirement(rawValue: versionRequirement)!, config: config, subspecs: subspec)
         } else if (type == 1) {
             // git
-            dep = DependencyInfo(name: name, git: url, gitDescription: branch, config: config, subspecs: subspec)
+            dep = DependencyInfo(name: name, gitUrl: url, gitType: GitType(rawValue: gitType!)!, gitDescription: branch, config: config, subspecs: subspec)
         } else if (type == 2) {
             // path
             dep = DependencyInfo(name: name, path: url, config: config, subspecs: subspec)

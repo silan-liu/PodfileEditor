@@ -23,7 +23,7 @@ extension Array where Element == String {
             
             index = index + 1
         }
-
+        
         return string
     }
 }

@@ -42,7 +42,7 @@ class EditDependencyViewController: AddDependencyViewController {
                 urlTextField.stringValue = dependencyInfo.version ?? ""
                 versionRequirementPopupButton.selectItem(at: (dependencyInfo.versionRequirement?.rawValue) ?? 0)
             } else if (type == SourceType.Git) {
-                urlTextField.stringValue = dependencyInfo.git ?? ""
+                urlTextField.stringValue = dependencyInfo.gitUrl ?? ""
                 branchTextField.stringValue = dependencyInfo.gitDescription ?? ""
             } else if (type == SourceType.Path) {
                 urlTextField.stringValue = dependencyInfo.path ?? ""

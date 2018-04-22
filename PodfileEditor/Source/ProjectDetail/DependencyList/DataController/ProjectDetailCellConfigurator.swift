@@ -51,10 +51,10 @@ class ProjectDetailCellConfigurator: NSObject {
         case SourceType.Podspec:
             return info.podspec
         case SourceType.Git:
-            if let git = info.git {
+            if let git = info.gitUrl {
                 var value = "git => " + git
-                if let gitDescription = info.gitDescription {
-                    value = value + "\n\nbranch/commit/tag => " + gitDescription
+                if let gitDescription = info.gitDescription, let gitType = info.gitType?.rawValue {
+                    value = value + "\n\n\(gitType) => " + gitDescription
                 }
 
                 return value

@@ -51,6 +51,12 @@ enum VersionRequirement: Int {
     }
 }
 
+enum GitType: String {
+    case branch
+    case commit
+    case tag
+}
+
 enum SourceType: Int {
     case Version
     case Git
@@ -76,7 +82,10 @@ struct DependencyInfo {
     var versionRequirement: VersionRequirement?
     
     // 指向git时，可能出现的选项
-    var git: String?
+    var gitUrl: String?
+    
+    // gitType
+    var gitType: GitType?
     
     // branch/commit/tag
     var gitDescription: String?
@@ -133,17 +142,18 @@ struct DependencyInfo {
         self.type = SourceType.Podspec
     }
     
-    init(name: String, git: String, config: String? = nil, subspecs: [String]? = nil) {
+    init(name: String, gitUrl: String, config: String? = nil, subspecs: [String]? = nil) {
         self.name = name
-        self.git = git
+        self.gitUrl = gitUrl
         self.config = config
         self.subspecs = subspecs
         self.type = SourceType.Git
     }
     
-    init(name: String, git: String, gitDescription: String? = nil, config: String? = nil, subspecs: [String]? = nil) {
+    init(name: String, gitUrl: String, gitType:GitType, gitDescription: String? = nil, config: String? = nil, subspecs: [String]? = nil) {
         self.name = name
-        self.git = git
+        self.gitUrl = gitUrl
+        self.gitType = gitType
         self.gitDescription = gitDescription
         self.config = config
         self.subspecs = subspecs
@@ -159,18 +169,38 @@ struct DependencyInfo {
         if !name.isEmpty {
             var string = "pod "
             
-            string = string + "'" + name + "'"
+            string = string + "'\(name)'"
             
             if type == .Version {
                 if let ver = version, let requirement = versionRequirement {
-                    string = string + "," + "'" + requirement.description() + ver + ","
+                    string = string + ", '\(requirement.description())\(ver)'"
                 }
             } else if type == .Git {
-                
+                if let url = gitUrl {
+                    string = string + ", :git => '\(url)'"
+                    
+                    if let gitDescription = gitDescription, let gitType = gitType {
+                        string = string + ", :\(gitType.rawValue) => '\(gitDescription)'"
+                    }
+                }
+            
             } else if type == .Path {
-                
+                if let path = path {
+                    string = string + ", :path => \(path)"
+                }
             } else if type == .Podspec {
-                
+                if let podspec = podspec {
+                    string = string + ", :podspec => \(podspec)"
+                }
+            }
+            
+            if let config = config, config != "None" {
+                string = string + ", :configuration => '\(config)'"
+            }
+            
+            if let subspecs = subspecs {
+                let subspecString = PodfileUtils.subspecsToStringWithBracket(subspecs: subspecs)
+                string =  string + ", :subspecs => \(subspecString)"
             }
             
             return string

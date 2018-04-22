@@ -12,6 +12,8 @@
                 <outlet property="branchTextField" destination="V2n-dS-YQj" id="seC-pn-vMb"/>
                 <outlet property="configPopUpButton" destination="ruw-4z-7su" id="TAb-vl-0d5"/>
                 <outlet property="errorLabel" destination="dOr-uL-bAH" id="RPe-OK-mOr"/>
+                <outlet property="gitTypeLabel" destination="hcQ-nD-4kN" id="Yd4-rn-Tl1"/>
+                <outlet property="gitTypePopUpButton" destination="le8-9x-HB9" id="MkM-2c-awy"/>
                 <outlet property="nameTextField" destination="lDk-fR-6im" id="BUt-8X-Bp8"/>
                 <outlet property="subspecTextField" destination="1Dq-B2-c24" id="byh-n8-LKG"/>
                 <outlet property="typePopupButton" destination="crH-i6-YPh" id="43I-Uh-h4j"/>
@@ -221,6 +223,28 @@ DQ
                         <action selector="chooseConfiguration:" target="-2" id="HnZ-11-TRE"/>
                     </connections>
                 </popUpButton>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hcQ-nD-4kN">
+                    <rect key="frame" x="181" y="402" width="49" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="gitType" id="a7y-Ny-u1S">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="le8-9x-HB9">
+                    <rect key="frame" x="181" y="370" width="83" height="26"/>
+                    <popUpButtonCell key="cell" type="push" title="branch" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="jWe-8E-6ml" id="Ie0-Fv-AFO">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" id="2Zp-vd-eEY">
+                            <items>
+                                <menuItem title="branch" state="on" id="jWe-8E-6ml"/>
+                                <menuItem title="commit" id="5OZ-ey-pBz"/>
+                                <menuItem title="tag" id="A0X-PJ-gfq"/>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                </popUpButton>
             </subviews>
             <constraints>
                 <constraint firstItem="dOr-uL-bAH" firstAttribute="leading" secondItem="crH-i6-YPh" secondAttribute="leading" id="1Ro-6S-j2Z"/>
@@ -231,6 +255,7 @@ DQ
                 <constraint firstItem="lDk-fR-6im" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="8VY-dZ-poj"/>
                 <constraint firstItem="AxT-li-BNO" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="91e-fN-0In"/>
                 <constraint firstItem="urc-Bx-SK8" firstAttribute="centerY" secondItem="DCV-3e-0rC" secondAttribute="centerY" id="9u4-5o-UWA"/>
+                <constraint firstItem="le8-9x-HB9" firstAttribute="top" secondItem="crH-i6-YPh" secondAttribute="top" id="CqD-ng-yyA"/>
                 <constraint firstItem="V2n-dS-YQj" firstAttribute="top" secondItem="ysD-mb-Z77" secondAttribute="bottom" constant="8" id="FfX-3a-b8K"/>
                 <constraint firstItem="cX6-RX-R0K" firstAttribute="top" secondItem="crH-i6-YPh" secondAttribute="bottom" constant="20" id="GuC-WC-B3c"/>
                 <constraint firstItem="W0N-c1-obv" firstAttribute="leading" secondItem="crH-i6-YPh" secondAttribute="leading" id="L7n-0I-eNh"/>
@@ -249,13 +274,16 @@ DQ
                 <constraint firstItem="1Dq-B2-c24" firstAttribute="top" secondItem="W0N-c1-obv" secondAttribute="bottom" constant="8" id="ZLZ-n9-P7A"/>
                 <constraint firstItem="ysD-mb-Z77" firstAttribute="top" secondItem="AxT-li-BNO" secondAttribute="bottom" constant="20" id="aSE-1N-xr5"/>
                 <constraint firstItem="l9c-Fi-Hqs" firstAttribute="top" secondItem="ysD-mb-Z77" secondAttribute="bottom" constant="9" id="ai1-Uf-oUJ"/>
+                <constraint firstItem="le8-9x-HB9" firstAttribute="leading" secondItem="crH-i6-YPh" secondAttribute="trailing" constant="76" id="cW8-gc-bvR"/>
                 <constraint firstItem="1Dq-B2-c24" firstAttribute="leading" secondItem="crH-i6-YPh" secondAttribute="leading" id="cnS-5v-723"/>
                 <constraint firstItem="l9c-Fi-Hqs" firstAttribute="leading" secondItem="crH-i6-YPh" secondAttribute="leading" id="dWR-Yb-TFu"/>
                 <constraint firstItem="dOr-uL-bAH" firstAttribute="top" secondItem="1Dq-B2-c24" secondAttribute="bottom" constant="15" id="e6Q-tf-F6P"/>
                 <constraint firstItem="lDk-fR-6im" firstAttribute="top" secondItem="NUx-az-s5y" secondAttribute="bottom" constant="3" id="e9e-8z-GoY"/>
                 <constraint firstItem="ruw-4z-7su" firstAttribute="leading" secondItem="crH-i6-YPh" secondAttribute="leading" id="eJA-aV-Nnv"/>
                 <constraint firstItem="DCV-3e-0rC" firstAttribute="leading" secondItem="urc-Bx-SK8" secondAttribute="trailing" constant="34" id="eMl-Av-gFQ"/>
+                <constraint firstItem="le8-9x-HB9" firstAttribute="top" secondItem="hcQ-nD-4kN" secondAttribute="bottom" constant="8" id="eT7-ka-2VD"/>
                 <constraint firstItem="V2n-dS-YQj" firstAttribute="leading" secondItem="crH-i6-YPh" secondAttribute="leading" id="erh-JF-4pD"/>
+                <constraint firstItem="le8-9x-HB9" firstAttribute="leading" secondItem="hcQ-nD-4kN" secondAttribute="leading" id="ppv-dd-Wax"/>
                 <constraint firstItem="W0N-c1-obv" firstAttribute="top" secondItem="ruw-4z-7su" secondAttribute="bottom" constant="20" id="s5D-hP-4yx"/>
                 <constraint firstItem="cX6-RX-R0K" firstAttribute="leading" secondItem="crH-i6-YPh" secondAttribute="leading" id="xKX-4X-tpP"/>
                 <constraint firstAttribute="trailing" secondItem="DCV-3e-0rC" secondAttribute="trailing" constant="30" id="xWB-4G-X2O"/>

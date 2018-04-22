@@ -139,35 +139,53 @@ class PodfileAnalyser {
     
     // 删除依赖
     func deleteDependency(at row: Int) {
-        let totalCount = dependencyIndexList.count
-        if row >= 0 && row < totalCount {
+        let line = lineForRow(at: row)
+        
+        if line != -1 && line < contentArray.count {
+            // 先copy一份
+            var copyContentArray = contentArray
+            copyContentArray.remove(at: line)
             
-            // 对应行数
-            let line = dependencyIndexList[row]
-            
-            if line < contentArray.count {
-                var copyContentArray = contentArray
-                copyContentArray.remove(at: line)
+            // 保存podfile
+            do {
+                try saveFile(array: copyContentArray)
                 
-                // 保存podfile
-                do {
-                    try saveFile(array: copyContentArray)
-                    
-                    // 真正移除
-                    contentArray.remove(at: line)
-                    dependencyMap.removeValue(forKey: line)
-
-                } catch let error as NSError {
-                    print("saveFile Error:\(error)")
-                }
+                // 真正移除
+                contentArray.remove(at: line)
+                dependencyMap.removeValue(forKey: line)
+                
+            } catch let error as NSError {
+                print("saveFile Error:\(error)")
             }
         }
     }
     
     // 修改依赖
     func editDependency(at row: Int, dep: DependencyInfo) {
-        
+        let line = lineForRow(at: row)
+            
+        if line != -1 && line < contentArray.count {
+            let depString = dep.toString()
+            print("depString: \(depString)")
+        }
     }
+    
+    // row所对应的行数
+    func lineForRow(at row: Int) -> Int {
+        let list = dependencyIndexList
+        let totalCount = list.count
+        
+        if row >= 0 && row < totalCount {
+            // 对应行数
+            let line = list[row]
+            if line < contentArray.count {
+                return line
+            }
+        }
+        
+        return -1
+    }
+    
     
     // 保存文件
     private func saveFile(array: [String]) throws {
@@ -300,7 +318,7 @@ class PodfileAnalyser {
                     // 匹配git
                     print("url:\(url)")
                     
-                    info.git = url
+                    info.gitUrl = url
                     info.type = .Git
                     
                     // 匹配branch
@@ -308,18 +326,21 @@ class PodfileAnalyser {
                         print("branch:\(branch)")
                         
                         info.gitDescription = branch
+                        info.gitType = .branch
                     }
                         // 匹配commit
                     else if let commit = regexMatchGroup(pattern: ":commit\\s*=>\\s*['\"](.*?)['\"]", matchString: line) {
                         print("commit:\(commit)")
                         
                         info.gitDescription = commit
+                        info.gitType = .commit
                     }
                         // tag
                     else if let tag = regexMatchGroup(pattern: ":tag\\s*=>\\s*['\"](.*?)['\"]", matchString: line) {
                         print("commit:\(tag)")
                         
                         info.gitDescription = tag
+                        info.gitType = .tag
                     }
                     
                 } else if let path = regexMatchGroup(pattern: ":path\\s*=>\\s*['\"](.*?)['\"]", matchString: line) {
