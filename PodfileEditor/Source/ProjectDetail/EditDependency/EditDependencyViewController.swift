@@ -46,6 +46,8 @@ class EditDependencyViewController: AddDependencyViewController {
                 branchTextField.stringValue = dependencyInfo.gitDescription ?? ""
             } else if (type == SourceType.Path) {
                 urlTextField.stringValue = dependencyInfo.path ?? ""
+            } else if (type == SourceType.Podspec) {
+                urlTextField.stringValue = dependencyInfo.podspec ?? ""
             }
             
             configPopUpButton.selectItem(at: dependencyInfo.configIndex.rawValue)

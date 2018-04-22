@@ -41,7 +41,11 @@ class ProjectDetailCellConfigurator: NSObject {
     func versionInfo(info: DependencyInfo) -> String? {
         switch info.type {
         case SourceType.Version:
-            return info.version
+            if let versionRequirement = info.versionRequirement, let version = info.version {
+                return versionRequirement.description() + " " + version
+            }
+            
+            return nil
         case SourceType.Path:
             return info.path
         case SourceType.Podspec:

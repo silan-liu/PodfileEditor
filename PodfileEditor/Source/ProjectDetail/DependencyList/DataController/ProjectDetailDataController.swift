@@ -34,22 +34,6 @@ class ProjectDetailDataController: NSObject {
     init(projectInfo: ProjectInfo?) {
         super.init()
         self.projectInfo = projectInfo
-        
-        var dependencyList = [DependencyInfo]()
-        
-        let dep1 = DependencyInfo(name: "lib1", git: "http://gitlbab.lib1", gitDescription: "master")
-        let dep2 = DependencyInfo(name: "lib2", git: "http://gitlbab.lib2")
-        let dep3 = DependencyInfo(name: "lib3", git: "http://gitlbab.lib2", gitDescription: "0.0.1")
-        let dep4 = DependencyInfo(name: "lib4", version: "9.0.2")
-        let dep5 = DependencyInfo(name: "lib5", git: "http://gitlab.lib5", gitDescription: "dev", config: "debug", subspecs: ["subspec", "s3", "d3"])
-        
-        dependencyList.append(dep1)
-        dependencyList.append(dep2)
-        dependencyList.append(dep3)
-        dependencyList.append(dep4)
-        dependencyList.append(dep5)
-
-        self.dependencyList = dependencyList
     }
     
     func addDependency(dep: DependencyInfo) {
@@ -60,12 +44,15 @@ class ProjectDetailDataController: NSObject {
 
         if (row >= 0 && row < numberOfRows()) {
             dependencyList?.remove(at: row)
+            podfileAnalyser?.deleteDependency(at: row)
         }
     }
     
     func editDependency(at row: Int, dep: DependencyInfo) {
         if (row >= 0 && row < numberOfRows()) {
             dependencyList?[row] = dep
+            
+            podfileAnalyser?.editDependency(at: row, dep: dep)
         }
     }
     
@@ -87,7 +74,14 @@ class ProjectDetailDataController: NSObject {
         return nil
     }
     
-    func analyze() {
-        podfileAnalyser?.analyze()
+    func analyze(completion: (() -> Void)?) {
+        podfileAnalyser?.analyze(completion: { dependencyList in
+            
+            self.dependencyList = dependencyList
+            
+            if let completion = completion {
+                completion()
+            }
+        })
     }
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -972,7 +972,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="X75-qq-Zg1">
-                                    <rect key="frame" x="743" y="23" width="16" height="266"/>
+                                    <rect key="frame" x="1143" y="23" width="16" height="396"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="Uq6-gp-5YW">
@@ -992,7 +992,7 @@
                                             <color key="textColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="minSize" width="1158" height="192"/>
-                                            <size key="maxSize" width="1158" height="10000000"/>
+                                            <size key="maxSize" width="1160" height="10000000"/>
                                             <attributedString key="textStorage">
                                                 <fragment content="console output:">
                                                     <attributes>
@@ -1053,6 +1053,14 @@
                                     <action selector="clearConsole:" target="eaV-Sa-27M" id="QKy-Td-wAq"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jXS-Gl-jev">
+                                <rect key="frame" x="1130" y="687" width="52" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="总共0项" id="f8C-XL-efo">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="icK-N8-qYu" secondAttribute="trailing" constant="20" id="3Fw-tQ-EJz"/>
@@ -1061,10 +1069,12 @@
                             <constraint firstItem="ihs-yQ-m1k" firstAttribute="leading" secondItem="qzl-IL-CcL" secondAttribute="leading" constant="20" id="CDY-ek-T0V"/>
                             <constraint firstItem="JQf-j7-pNi" firstAttribute="top" secondItem="qzl-IL-CcL" secondAttribute="top" constant="28" id="HSI-cW-Ha1"/>
                             <constraint firstItem="Bh2-kq-9db" firstAttribute="top" secondItem="49c-L2-wAG" secondAttribute="bottom" constant="2" id="Izk-ca-83C"/>
+                            <constraint firstAttribute="trailing" secondItem="jXS-Gl-jev" secondAttribute="trailing" constant="20" id="KUa-el-mAZ"/>
                             <constraint firstItem="icK-N8-qYu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qzl-IL-CcL" secondAttribute="leading" constant="20" symbolic="YES" id="R6D-MC-LSq"/>
                             <constraint firstItem="2QC-es-aft" firstAttribute="centerX" secondItem="LHw-uI-b4N" secondAttribute="centerX" id="TZP-bm-ys2"/>
                             <constraint firstItem="icK-N8-qYu" firstAttribute="top" secondItem="ihs-yQ-m1k" secondAttribute="bottom" constant="14" id="TxE-Fh-rMS"/>
                             <constraint firstItem="ihs-yQ-m1k" firstAttribute="top" secondItem="5Ur-Ox-NQU" secondAttribute="bottom" constant="30" id="Ybn-zt-TIe"/>
+                            <constraint firstItem="ihs-yQ-m1k" firstAttribute="top" secondItem="jXS-Gl-jev" secondAttribute="bottom" constant="4" id="aOb-AU-igx"/>
                             <constraint firstItem="49c-L2-wAG" firstAttribute="leading" secondItem="LHw-uI-b4N" secondAttribute="trailing" constant="73" id="eP9-eA-cwQ"/>
                             <constraint firstAttribute="trailing" secondItem="ihs-yQ-m1k" secondAttribute="trailing" constant="20" id="fTl-hH-oWR"/>
                             <constraint firstItem="LHw-uI-b4N" firstAttribute="top" secondItem="JQf-j7-pNi" secondAttribute="top" id="hMS-Rn-WlZ"/>
@@ -1082,6 +1092,7 @@
                     <connections>
                         <outlet property="tableView" destination="sM6-uS-QUh" id="Kcz-7Q-OhN"/>
                         <outlet property="textView" destination="H5a-Qe-3fi" id="S7d-Zn-Ggk"/>
+                        <outlet property="totalCountLabel" destination="jXS-Gl-jev" id="2I8-Un-4wa"/>
                     </connections>
                 </viewController>
                 <customObject id="WVo-9l-9q1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1156,7 +1167,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="k2m-bx-gIl">
-                                    <rect key="frame" x="678" y="1" width="16" height="325"/>
+                                    <rect key="frame" x="834" y="1" width="16" height="425"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>

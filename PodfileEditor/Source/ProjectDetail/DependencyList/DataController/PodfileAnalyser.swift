@@ -9,12 +9,34 @@
 import Cocoa
 
 class PodfileAnalyser {
+    // podfile路径
     var podfilePath: String
-    private lazy var targetMap = [Int: String]()
+
+    // podfile content array
+    private var contentArray = [String]()
     
     // 行数->依赖信息
-    private lazy var dependencyList = [Int: DependencyInfo]()
+    private lazy var dependencyMap = [Int: DependencyInfo]()
     
+    // 记录行index，从小到大
+    private var dependencyIndexList: [Int]  {
+        let list = Array(dependencyMap.keys).sorted()
+        return list
+    }
+    
+    // index排序后，对应的dependencyList
+    private var dependencyInfoList: [DependencyInfo] {
+        var list = [DependencyInfo]()
+        for dependencyIndex in dependencyIndexList {
+            if let dependency = dependencyMap[dependencyIndex] {
+                list.append(dependency)
+            }
+        }
+        
+        return list
+    }
+    
+    // 方法起始位置定义
     enum DefFunctionIndex: String {
         case Start
         case End
@@ -28,7 +50,7 @@ class PodfileAnalyser {
     }
 
     //MARK: Analyze
-    func analyze() {
+    func analyze(completion: (([DependencyInfo]) -> Void)?) {
         print("begin analyze")
         
         do {
@@ -43,6 +65,10 @@ class PodfileAnalyser {
             
             // 以行分隔
             let lines = content.components(separatedBy: .newlines)
+            
+            contentArray = lines
+            
+            print("combined: \(lines.joined(separator: "\n"))")
             
             // 记录行数index
             var index = -1
@@ -59,13 +85,13 @@ class PodfileAnalyser {
                     continue
                 }
                 
-                if let result = regexMatchGroup(pattern: "\\s*target\\s*['\"]([\\w]+)['\"]", matchString: line) {
-                    print("target: \(result)")
-                    
-                    targetMap[index] = result
+                // 解析依赖信息
+                if let info = extractDependencyInfo(line: line) {
+                    dependencyMap[index] = info
                 }
+                
                 // 匹配到def，记录开始，结束行数
-                else if let result = regexMatchGroup(pattern: "\\s*def\\s*(\\w+)", matchString: line) {
+                if let result = regexMatchGroup(pattern: "\\s*def\\s*(\\w+)", matchString: line) {
                     
                     if let body = defContent[result] {
                         
@@ -88,20 +114,69 @@ class PodfileAnalyser {
                     }
                 }
             }
+
+            print("dependencyList count: \(dependencyMap.count)")
             
-            print("dependencyList count: \(dependencyList.count)")
-            
-            for (key, value) in dependencyList {
+            for (key, value) in dependencyMap {
                 print("line:\(key), info:\(value)")
             }
             
             print("defIndexInfo:\(defIndexInfo)")
+            
+            if let completion = completion {
+                completion(dependencyInfoList)
+            }
             
         } catch let error as NSError {
             print("error:\(error)")
         }
     }
     
+    // podFile中的依赖项
+    func dependencyList() -> [DependencyInfo] {
+        return dependencyInfoList
+    }
+    
+    // 删除依赖
+    func deleteDependency(at row: Int) {
+        let totalCount = dependencyIndexList.count
+        if row >= 0 && row < totalCount {
+            
+            // 对应行数
+            let line = dependencyIndexList[row]
+            
+            if line < contentArray.count {
+                var copyContentArray = contentArray
+                copyContentArray.remove(at: line)
+                
+                // 保存podfile
+                do {
+                    try saveFile(array: copyContentArray)
+                    
+                    // 真正移除
+                    contentArray.remove(at: line)
+                    dependencyMap.removeValue(forKey: line)
+
+                } catch let error as NSError {
+                    print("saveFile Error:\(error)")
+                }
+            }
+        }
+    }
+    
+    // 修改依赖
+    func editDependency(at row: Int, dep: DependencyInfo) {
+        
+    }
+    
+    // 保存文件
+    private func saveFile(array: [String]) throws {
+        let content = array.joined(separator: "\n")
+        
+        let url = URL(fileURLWithPath: "/Users/liusilan/Desktop/1")
+
+        try content.write(to: url, atomically: true, encoding: .utf8)
+    }
     
     /// 该行是否应该解析pod信息
     ///
@@ -109,7 +184,7 @@ class PodfileAnalyser {
     ///   - index: 行数
     ///   - defIndexInfo: def函数开始结束行index
     /// - Returns: true/false
-    func lineShouldParse(index: Int, defIndexInfo: [String: [DefFunctionIndex: Int]]) -> Bool {
+    private func lineShouldParse(index: Int, defIndexInfo: [String: [DefFunctionIndex: Int]]) -> Bool {
         for (_, value) in defIndexInfo {
             // 在def -- end之间，不进行解析，若之后有调用函数，才解。
             if let startIndex = value[.Start], let endIndex = value[.End] {
@@ -125,7 +200,7 @@ class PodfileAnalyser {
     /// 找到podFile中定义的方法
     ///
     /// - Parameter string
-    func findFunction(string: String) {
+    private func findFunction(string: String) {
         do {
             // 设置.可匹配换行
             let regularExp = try NSRegularExpression(pattern: "\\s*def\\s*(\\w+)\\(\\)\\s*(.*?)end", options:.dotMatchesLineSeparators)
@@ -154,7 +229,7 @@ class PodfileAnalyser {
     ///
     /// - Parameter functionName: 函数名
     /// - Returns: true/false
-    func isCallFunction(functionName: String) -> Bool {
+    private func isCallFunction(functionName: String) -> Bool {
         if let _ = defContent.index(forKey: functionName) {
             return true
         }
@@ -168,7 +243,7 @@ class PodfileAnalyser {
     /// - Parameters:
     ///   - functionName: 方法名
     ///   - beginIndex: 方法所在行数
-    func extractFunctionDependency(functionName: String, beginIndex: Int) {
+    private func extractFunctionDependency(functionName: String, beginIndex: Int) {
         if let body = defContent[functionName] {
             
             // 以行分隔
@@ -178,7 +253,7 @@ class PodfileAnalyser {
             for line in lines {
                 
                 if let dependencyInfo = extractDependencyInfo(line: line) {
-                    dependencyList[index] = dependencyInfo
+                    dependencyMap[index] = dependencyInfo
                 }
                 
                 index = index + 1
@@ -190,7 +265,7 @@ class PodfileAnalyser {
     ///
     /// - Parameter line: 一行输入
     /// - Returns: 依赖结果
-    func extractDependencyInfo(line: String) -> DependencyInfo? {
+    private func extractDependencyInfo(line: String) -> DependencyInfo? {
         // 过滤空行，注释行
         let trimmed = line.replacingOccurrences(of: " ", with: "")
         
@@ -270,12 +345,12 @@ class PodfileAnalyser {
                 
                 info.config = result
             }
-                // :configurations => ['Debug']
+            // :configurations => ['Debug']
             else if let result = regexMatchGroup(pattern: ":configurations\\s*=>\\s*\\[(.*)\\]", matchString: line) {
                 let configurations = parseSubspecs(subspecs: result)
                 
                 // 目前只支持一种config
-                if configurations.count > 1 {
+                if configurations.count >= 1 {
                     info.config = configurations[0]
                 }
                 print("configurations:\(configurations)")
@@ -302,15 +377,14 @@ class PodfileAnalyser {
     }
     
     //MARK:Helper
-    
     /// 进行正则匹配，返回group 1
-    func regexMatchGroup(pattern: String, matchString: String) -> String? {
+    private func regexMatchGroup(pattern: String, matchString: String) -> String? {
         return regexMatch(pattern: pattern, matchString: matchString, index: 1)
     }
     
     
     /// 正则匹配，返回全部匹配的字符串
-    func regexMatchFull(pattern: String, matchString: String) -> String? {
+    private func regexMatchFull(pattern: String, matchString: String) -> String? {
         return regexMatch(pattern: pattern, matchString: matchString, index: 0)
     }
     
@@ -322,7 +396,7 @@ class PodfileAnalyser {
     ///   - matchString: 待匹配字符串
     ///   - index: 匹配的index
     /// - Returns: 匹配字符串
-    func regexMatch(pattern: String, matchString: String, index: Int) -> String? {
+    private func regexMatch(pattern: String, matchString: String, index: Int) -> String? {
         do {
             let regularExp = try NSRegularExpression(pattern: pattern, options: [])
             
@@ -342,14 +416,14 @@ class PodfileAnalyser {
     }
     
     // 去除引号, '/"
-    func trimQuotation(string: String) -> String {
+    private func trimQuotation(string: String) -> String {
         var result = string.replacingOccurrences(of: "'", with: "")
         result = result.replacingOccurrences(of: "\"", with: "")
         return result
     }
     
     // 将字符串"'A','B'"转换成数组[A,B]
-    func parseSubspecs(subspecs: String) -> [String] {
+    private func parseSubspecs(subspecs: String) -> [String] {
         var trimmed = trimQuotation(string: subspecs)
         trimmed = trimmed.replacingOccurrences(of: " ", with: "")
         
@@ -370,7 +444,7 @@ class PodfileAnalyser {
     ///
     /// - Parameter version: 完整版本号描述
     /// - Returns: (限制符, 版本号)
-    func extractVersion(versionDesc: String) -> (VersionRequirement, String) {
+    private func extractVersion(versionDesc: String) -> (VersionRequirement, String) {
         let trimmed = versionDesc.replacingOccurrences(of: " ", with: "")
         var versionRequirementString = "=="
         var versionRequirement = VersionRequirement.Equal

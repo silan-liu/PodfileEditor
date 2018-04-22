@@ -64,6 +64,12 @@ class AddDependencyViewController: NSViewController {
         } else if (tag == 0) {
             urlLabel.stringValue = "version (optional)"
             showVersionRequirement(show: true)
+        } else if (tag == 3) {
+            urlLabel.stringValue = "podspec"
+            
+            // textField不能输入
+            branchTextField.isEnabled = false
+            showVersionRequirement(show: false)
         }
     }
     

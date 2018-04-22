@@ -149,4 +149,33 @@ struct DependencyInfo {
         self.subspecs = subspecs
         self.type = SourceType.Git
     }
+    
+    
+    /// 转换成pod书写格式, pod 'xx', '0.0.1'
+    ///
+    /// - Returns: string
+    func toString() -> String {
+        
+        if !name.isEmpty {
+            var string = "pod "
+            
+            string = string + "'" + name + "'"
+            
+            if type == .Version {
+                if let ver = version, let requirement = versionRequirement {
+                    string = string + "," + "'" + requirement.description() + ver + ","
+                }
+            } else if type == .Git {
+                
+            } else if type == .Path {
+                
+            } else if type == .Podspec {
+                
+            }
+            
+            return string
+        }
+        
+        return ""
+    }
 }

@@ -12,6 +12,7 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
 
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet var textView: NSTextView!
+    @IBOutlet weak var totalCountLabel: NSTextField!
     
     enum CellIdentifier: String {
         case ProjectActionCellView
@@ -140,7 +141,10 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
         if let projectInfo = projectInfo {
             print("projectInfo:\(projectInfo.projectPath)")
             dataController.projectInfo = projectInfo
-            dataController.analyze()
+            dataController.analyze { [unowned self] in
+                self.tableView.reloadData()
+                self.totalCountLabel.stringValue = "总共\(self.dataController.numberOfRows())项"
+            }
         }
     }
     

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -37,7 +37,7 @@
                     </textFieldCell>
                 </textField>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="crH-i6-YPh">
-                    <rect key="frame" x="20" y="370" width="81" height="26"/>
+                    <rect key="frame" x="20" y="370" width="90" height="26"/>
                     <popUpButtonCell key="cell" type="push" title="version" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="sLS-GV-mGE" id="Pe7-NV-75N">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
@@ -46,6 +46,9 @@
                                 <menuItem title="version" state="on" id="sLS-GV-mGE"/>
                                 <menuItem title="git" id="ItN-2C-oEm"/>
                                 <menuItem title="path" id="l8c-hs-dao"/>
+                                <menuItem title="podspec" id="0yh-BV-la3">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
                             </items>
                         </menu>
                     </popUpButtonCell>
@@ -102,7 +105,7 @@ DQ
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ysD-mb-Z77">
-                    <rect key="frame" x="20" y="269" width="181" height="17"/>
+                    <rect key="frame" x="20" y="269" width="182" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="branch/commit/tag (optional)" id="PS3-8T-iYP">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -201,16 +204,16 @@ DQ
                 </textField>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ruw-4z-7su">
                     <rect key="frame" x="20" y="170" width="85" height="26"/>
-                    <popUpButtonCell key="cell" type="push" title="None" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="8fI-Ex-ZBk" id="fdT-g9-ln4">
+                    <popUpButtonCell key="cell" type="push" title="None" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="8fI-Ex-ZBk" id="fdT-g9-ln4">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="UhP-DW-sbJ">
                             <items>
-                                <menuItem title="None" id="8fI-Ex-ZBk">
+                                <menuItem title="None" state="on" id="8fI-Ex-ZBk">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                                 <menuItem title="Debug" id="ybZ-Co-ptX"/>
-                                <menuItem title="Release" state="on" id="ixk-hc-9vJ"/>
+                                <menuItem title="Release" id="ixk-hc-9vJ"/>
                             </items>
                         </menu>
                     </popUpButtonCell>
