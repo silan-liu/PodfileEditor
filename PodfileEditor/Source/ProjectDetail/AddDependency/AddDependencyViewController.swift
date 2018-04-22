@@ -137,6 +137,9 @@ class AddDependencyViewController: NSViewController {
         } else if (type == 2) {
             // path
             dep = DependencyInfo(name: name, path: url, config: config, subspecs: subspec)
+        } else if (type == 3) {
+            // podspec
+            dep = DependencyInfo(name: name, podspec: url, config: config, subspecs: subspec);
         }
         
         if let dep = dep {

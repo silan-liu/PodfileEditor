@@ -18,7 +18,7 @@ class PodfileAnalyser {
     // 行数->依赖信息
     private lazy var dependencyMap = [Int: DependencyInfo]()
     
-    // 记录行index，从小到大
+    // 行index，从小到大
     private var dependencyIndexList: [Int]  {
         let list = Array(dependencyMap.keys).sorted()
         return list
@@ -37,7 +37,7 @@ class PodfileAnalyser {
     }
     
     // 方法起始位置定义
-    enum DefFunctionIndex: String {
+    private enum DefFunctionIndex: String {
         case Start
         case End
     }
@@ -154,6 +154,8 @@ class PodfileAnalyser {
                 contentArray.remove(at: line)
                 dependencyMap.removeValue(forKey: line)
                 
+                print("delete sucess")
+
             } catch let error as NSError {
                 print("saveFile Error:\(error)")
             }
@@ -167,6 +169,23 @@ class PodfileAnalyser {
         if line != -1 && line < contentArray.count {
             let depString = dep.toString()
             print("depString: \(depString)")
+            
+            // 先copy一份
+            var copyContentArray = contentArray
+            copyContentArray[line] = dep.toString()
+            
+            // 保存podfile
+            do {
+                try saveFile(array: copyContentArray)
+                
+                // 保存成功后，进行修改
+                contentArray[line] = dep.toString()
+                dependencyMap[line] = dep
+                
+                print("edit sucess")
+            } catch let error as NSError {
+                print("saveFile Error:\(error)")
+            }
         }
     }
     

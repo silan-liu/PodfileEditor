@@ -167,7 +167,7 @@ struct DependencyInfo {
     func toString() -> String {
         
         if !name.isEmpty {
-            var string = "pod "
+            var string = "\tpod "
             
             string = string + "'\(name)'"
             
