@@ -62,6 +62,23 @@ class AddDependencyViewController: NSViewController {
     }
     
     //MARK: Action
+    @IBAction func preview(_ sender: Any) {
+        if let info = generateDependencyInfo() {
+            
+            var depString = info.toString()
+            if depString.isEmpty {
+                depString = "No Preview, Please check input"
+            }
+            
+            let alert = NSAlert()
+            alert.messageText = depString
+           
+            alert.alertStyle = .informational
+            alert.addButton(withTitle: "OK")
+            alert.beginSheetModal(for: view.window!, completionHandler: nil)
+        }
+    }
+    
     @IBAction func chooseType(_ sender: Any) {
         let popupButton = sender as! NSPopUpButton
         let tag = popupButton.indexOfSelectedItem
@@ -115,41 +132,8 @@ class AddDependencyViewController: NSViewController {
             errorLabel.stringValue = result.1
             return
         }
-        
-        let name = nameTextField.stringValue
-        let url = urlTextField.stringValue
-        let branch = branchTextField.stringValue
-        let type = typePopupButton.indexOfSelectedItem
-        let versionRequirement = versionRequirementPopupButton.indexOfSelectedItem
-        
-        let configIndex = configPopUpButton.indexOfSelectedItem
-        var config = configPopUpButton.selectedItem?.title
-        
-        if configIndex == 0 {
-            config = nil
-        }
 
-        let gitType = gitTypePopUpButton.selectedItem?.title
-        
-        let subspecString = subspecTextField.stringValue
-        let subspec = subspecs(string: subspecString)
-        
-        var dep: DependencyInfo? = nil
-        if (type == 0) {
-           // version
-            dep = DependencyInfo(name: name, version: url, versionRequirement: VersionRequirement(rawValue: versionRequirement)!, config: config, subspecs: subspec)
-        } else if (type == 1) {
-            // git
-            dep = DependencyInfo(name: name, gitUrl: url, gitType: GitType(rawValue: gitType!)!, gitDescription: branch, config: config, subspecs: subspec)
-        } else if (type == 2) {
-            // path
-            dep = DependencyInfo(name: name, path: url, config: config, subspecs: subspec)
-        } else if (type == 3) {
-            // podspec
-            dep = DependencyInfo(name: name, podspec: url, config: config, subspecs: subspec);
-        }
-        
-        if let dep = dep {
+        if let dep = generateDependencyInfo() {
             print("dep: \(dep)")
             
             beforeDismissAction(dep: dep)
@@ -178,13 +162,54 @@ class AddDependencyViewController: NSViewController {
         return (true, "")
     }
     
+    func generateDependencyInfo() -> DependencyInfo? {
+        
+        let name = nameTextField.stringValue
+        let url = urlTextField.stringValue
+        let branch = branchTextField.stringValue
+        let type = typePopupButton.indexOfSelectedItem
+        let versionRequirement = versionRequirementPopupButton.indexOfSelectedItem
+        
+        let configIndex = configPopUpButton.indexOfSelectedItem
+        var config = configPopUpButton.selectedItem?.title
+        
+        if configIndex == 0 {
+            config = nil
+        }
+        
+        let gitType = gitTypePopUpButton.selectedItem?.title
+        
+        let subspecString = subspecTextField.stringValue
+        let subspec = subspecs(string: subspecString)
+        
+        var dep: DependencyInfo? = nil
+        if (type == 0) {
+            // version
+            dep = DependencyInfo(name: name, version: url, versionRequirement: VersionRequirement(rawValue: versionRequirement)!, config: config, subspecs: subspec)
+        } else if (type == 1) {
+            // git
+            dep = DependencyInfo(name: name, gitUrl: url, gitType: GitType(rawValue: gitType!)!, gitDescription: branch, config: config, subspecs: subspec)
+        } else if (type == 2) {
+            // path
+            dep = DependencyInfo(name: name, path: url, config: config, subspecs: subspec)
+        } else if (type == 3) {
+            // podspec
+            dep = DependencyInfo(name: name, podspec: url, config: config, subspecs: subspec);
+        }
+        
+        return dep
+    }
+    
     func subspecs(string: String) -> [String]? {
         if string.isEmpty {
             return nil
         }
         
         let result = string.replacingOccurrences(of: " ", with: "")
-        let list = result.components(separatedBy: ",")
+        var list = result.components(separatedBy: ",")
+        list = list.filter { (str) -> Bool in
+            return !str.isEmpty
+        }
         return list
     }
 }

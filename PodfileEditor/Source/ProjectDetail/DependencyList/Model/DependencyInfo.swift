@@ -167,19 +167,24 @@ struct DependencyInfo: Equatable {
     func toString() -> String {
         
         if !name.isEmpty {
-            var string = "\tpod "
+            var string = "pod "
             
             string = string + "'\(name)'"
             
             if type == .Version {
                 if let ver = version, let requirement = versionRequirement {
-                    string = string + ", '\(requirement.description())\(ver)'"
+                    let requirementDesc = requirement.description()
+                    if requirementDesc.isEmpty {
+                        string = string + ", '\(ver)'"
+                    } else {
+                        string = string + ", '\(requirement.description()) \(ver)'"
+                    }
                 }
             } else if type == .Git {
                 if let url = gitUrl {
                     string = string + ", :git => '\(url)'"
                     
-                    if let gitDescription = gitDescription, let gitType = gitType {
+                    if let gitDescription = gitDescription, let gitType = gitType, !gitDescription.isEmpty {
                         string = string + ", :\(gitType.rawValue) => '\(gitDescription)'"
                     }
                 }
@@ -211,7 +216,7 @@ struct DependencyInfo: Equatable {
     
     static func ==(lhs: DependencyInfo, rhs: DependencyInfo) -> Bool {
         
-        if lhs.name != lhs.name {
+        if lhs.name != rhs.name {
             return false
         }
         

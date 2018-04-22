@@ -169,10 +169,13 @@ class PodfileAnalyser {
         if line != -1 && line < contentArray.count {
             let depString = dep.toString()
             print("depString: \(depString)")
+
+            // TODO:如果不同的target中定义了相同的依赖，则也同时修改
+
             
             // 先copy一份
             var copyContentArray = contentArray
-            copyContentArray[line] = dep.toString()
+            copyContentArray[line] = "\t" + dep.toString()
             
             // 保存podfile
             do {
