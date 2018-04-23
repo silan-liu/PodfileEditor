@@ -50,6 +50,10 @@ class EditDependencyViewController: AddDependencyViewController {
                 urlTextField.stringValue = dependencyInfo.podspec ?? ""
             }
             
+            if let gitType = dependencyInfo.gitType {
+                gitTypePopUpButton.selectItem(withTitle: gitType.rawValue)
+            }
+            
             configPopUpButton.selectItem(at: dependencyInfo.configIndex.rawValue)
             
             if let subspecs = dependencyInfo.subspecs {

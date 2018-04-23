@@ -51,12 +51,23 @@ class ProjectDetailCellConfigurator: NSObject {
             
             return nil
         case SourceType.Path:
-            return info.path
+            if let path = info.path {
+                return ":path => " + path
+            }
+            
+            return nil
+            
         case SourceType.Podspec:
-            return info.podspec
+            
+            if let podspec = info.podspec {
+                return ":podspec => " + podspec
+            }
+            
+            return nil
+            
         case SourceType.Git:
             if let git = info.gitUrl {
-                var value = "git => " + git
+                var value = ":git => " + git
                 if let gitDescription = info.gitDescription, let gitType = info.gitType?.rawValue {
                     value = value + "\n\n\(gitType) => " + gitDescription
                 }

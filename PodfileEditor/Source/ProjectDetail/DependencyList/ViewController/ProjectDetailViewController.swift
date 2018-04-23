@@ -125,6 +125,10 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
     }
     
     @IBAction func refreshDependency(_ sender: Any) {
+        self.dataController.refresh { [unowned self] in
+            self.tableView.reloadData()
+            self.totalCountLabel.stringValue = "总共\(self.dataController.numberOfRows())项"
+        }
     }
     
     //MARK：func

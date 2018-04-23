@@ -81,7 +81,7 @@ class PodfileAnalyser {
                 index = index + 1
 
                 // 判断该行是否应该解析
-                if !lineShouldParse(index: index, defIndexInfo: defIndexInfo) {
+                if !lineShouldParse(index: index, line: line, defIndexInfo: defIndexInfo) {
                     continue
                 }
                 
@@ -91,18 +91,18 @@ class PodfileAnalyser {
                 }
                 
                 // 匹配到def，记录开始，结束行数
-                if let result = regexMatchGroup(pattern: "\\s*def\\s*(\\w+)", matchString: line) {
+                if let result = regexMatchGroup(pattern: "\\s*def\\s*(\\w+)(\\(\\))?", matchString: line) {
                     
                     if let body = defContent[result] {
                         
                         let bodyLines = body.components(separatedBy: .newlines)
 
-                        // 用newline分隔，最后一个元素是""，需去除(-1)，但因要加上end这一行(+1)，刚好抵消
-                        defIndexInfo[result] = [.Start: index, .End: (index + bodyLines.count)]
+                        // 用\n分隔，第一个和最后一个元素都是""，需去除(-2)，但因要加上end这一行(+1)，整体-1
+                        defIndexInfo[result] = [.Start: index, .End: (index + bodyLines.count - 1)]
                     }
                 }
                 // 判断该行是否是函数调用,test()
-                else if let result = regexMatchGroup(pattern: "\\s*(.*?)\\s*\\(\\)", matchString: line) {
+                else if let result = regexMatchGroup(pattern: "\\s*(\\w+)\\s*\\(?\\)?", matchString: line) {
                     
                     if isCallFunction(functionName: result) {
                         print("call function: \(result)")
@@ -130,6 +130,14 @@ class PodfileAnalyser {
         } catch let error as NSError {
             print("error:\(error)")
         }
+    }
+    
+    // 重新分析
+    func reAnalyze(completion: (([DependencyInfo]) -> Void)?) {
+        dependencyMap.removeAll()
+        contentArray.removeAll()
+        
+        analyze(completion: completion)
     }
     
     // podFile中的依赖项
@@ -224,7 +232,14 @@ class PodfileAnalyser {
     ///   - index: 行数
     ///   - defIndexInfo: def函数开始结束行index
     /// - Returns: true/false
-    private func lineShouldParse(index: Int, defIndexInfo: [String: [DefFunctionIndex: Int]]) -> Bool {
+    private func lineShouldParse(index: Int, line: String, defIndexInfo: [String: [DefFunctionIndex: Int]]) -> Bool {
+        // 过滤空行，注释行
+        let trimmed = line.replacingOccurrences(of: " ", with: "")
+        
+        if trimmed.isEmpty || trimmed.hasPrefix("#") {
+            return false
+        }
+        
         for (_, value) in defIndexInfo {
             // 在def -- end之间，不进行解析，若之后有调用函数，才解。
             if let startIndex = value[.Start], let endIndex = value[.End] {
@@ -242,8 +257,8 @@ class PodfileAnalyser {
     /// - Parameter string
     private func findFunction(string: String) {
         do {
-            // 设置.可匹配换行
-            let regularExp = try NSRegularExpression(pattern: "\\s*def\\s*(\\w+)\\(\\)\\s*(.*?)end", options:.dotMatchesLineSeparators)
+            // 设置.可匹配换行 括号def test()可选
+            let regularExp = try NSRegularExpression(pattern: "\\s*def\\s*(\\w+)\\(?\\)?(.*?)end", options:.dotMatchesLineSeparators)
             let matches = regularExp.matches(in: string, options: [], range: NSRange(location: 0, length: string.count))
             for match in matches {
                 // 0表示匹配到的整个部分，之后才是分组
@@ -319,15 +334,13 @@ class PodfileAnalyser {
             
             var info = DependencyInfo(name: podName)
             
-            // 取版本号，以,分隔
+            // 取版本号，以,分隔。如果有版本号，一定是跟在pod name后面，取第一个逗号后面''部分
             let list = trimmed.components(separatedBy: ",")
             if list.count > 1 {
                 // 取第二个元素
-                var versionString = list[1]
+                let versionString = list[1]
                 
                 if versionString.hasPrefix("'") || versionString.hasPrefix("\"") {
-                    
-                    versionString = trimQuotation(string: versionString)
                     
                     let tmp = extractVersion(versionDesc: versionString)
                     print("versionRequirement:\(tmp.0), version: \(tmp.1)")
@@ -488,32 +501,39 @@ class PodfileAnalyser {
     /// - Parameter version: 完整版本号描述
     /// - Returns: (限制符, 版本号)
     private func extractVersion(versionDesc: String) -> (VersionRequirement, String) {
-        let trimmed = versionDesc.replacingOccurrences(of: " ", with: "")
-        var versionRequirementString = "=="
-        var versionRequirement = VersionRequirement.Equal
         
-        if trimmed.hasPrefix("~>") {
-            versionRequirementString = "~>"
-            versionRequirement = VersionRequirement.Compatible
+        // 提取出''之间的字符串
+        if let versionString = regexMatchGroup(pattern: "'(.+)'", matchString: versionDesc) {
             
-        } else if trimmed.hasPrefix(">") {
-            versionRequirementString = ">"
-            versionRequirement = VersionRequirement.GreaterThan
+            let trimmed = versionString.replacingOccurrences(of: " ", with: "")
+            var versionRequirementString = "=="
+            var versionRequirement = VersionRequirement.Equal
             
-        } else if trimmed.hasPrefix(">=") {
-            versionRequirementString = ">="
-            versionRequirement = VersionRequirement.GreaterThanOrEqual
+            if trimmed.hasPrefix("~>") {
+                versionRequirementString = "~>"
+                versionRequirement = VersionRequirement.Compatible
+                
+            } else if trimmed.hasPrefix(">") {
+                versionRequirementString = ">"
+                versionRequirement = VersionRequirement.GreaterThan
+                
+            } else if trimmed.hasPrefix(">=") {
+                versionRequirementString = ">="
+                versionRequirement = VersionRequirement.GreaterThanOrEqual
+                
+            } else if trimmed.hasPrefix("<") {
+                versionRequirementString = "<"
+                versionRequirement = VersionRequirement.LessThan
+                
+            } else if trimmed.hasPrefix("<=") {
+                versionRequirementString = "<="
+                versionRequirement = VersionRequirement.LessThanOrEqual
+            }
             
-        } else if trimmed.hasPrefix("<") {
-            versionRequirementString = "<"
-            versionRequirement = VersionRequirement.LessThan
-            
-        } else if trimmed.hasPrefix("<=") {
-            versionRequirementString = "<="
-            versionRequirement = VersionRequirement.LessThanOrEqual
+            let verison = trimmed.replacingOccurrences(of: versionRequirementString, with: "")
+            return (versionRequirement, verison)
         }
         
-        let verison = trimmed.replacingOccurrences(of: versionRequirementString, with: "")
-        return (versionRequirement, verison)
+        return (VersionRequirement.Equal, "")
     }
 }

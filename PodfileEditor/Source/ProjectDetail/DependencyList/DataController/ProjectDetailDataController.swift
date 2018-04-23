@@ -84,4 +84,19 @@ class ProjectDetailDataController: NSObject {
             }
         })
     }
+    
+    // 刷新列表
+    func refresh(completion: (() -> Void)?) {
+        
+        self.dependencyList?.removeAll()
+        
+        podfileAnalyser?.reAnalyze(completion: { dependencyList in
+            
+            self.dependencyList = dependencyList
+            
+            if let completion = completion {
+                completion()
+            }
+        })
+    }
 }
