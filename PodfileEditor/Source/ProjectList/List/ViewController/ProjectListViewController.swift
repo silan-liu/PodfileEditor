@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ProjectListViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+class ProjectListViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSWindowDelegate {
 
     @IBOutlet weak var tableView: NSTableView!
     
@@ -35,7 +35,7 @@ class ProjectListViewController: NSViewController, NSTableViewDelegate, NSTableV
     // MARK:Action
     @IBAction func addProject(_ sender: Any) {
         if let vc = UIFactory.addProjectViewController() {
-            vc.chooseCompletion = { (projectName, projectPath) in
+            vc.chooseCompletion = { [unowned self] (projectName, projectPath) in
                 self.projectListDataController.addProject(projectName: projectName, projectPath: projectPath)
                 self.tableView.reloadData()
             }
@@ -65,14 +65,14 @@ class ProjectListViewController: NSViewController, NSTableViewDelegate, NSTableV
             projectInfoCellConfigurator.configCell(cell: cellView, info: projectInfo)
         }
         
-        cellView.deleteBlock = { [weak self] cell in
+        cellView.deleteBlock = { [unowned self] cell in
             let row = tableView.row(for: cellView)
-            self?.deleteProject(at: row)
+            self.deleteProject(at: row)
         }
         
-        cellView.editBlock = { [weak self] cell in
+        cellView.editBlock = { [unowned self] cell in
             let row = tableView.row(for: cellView)
-            self?.editProject(at: row)
+            self.editProject(at: row)
         }
         
         return cellView
@@ -89,7 +89,7 @@ class ProjectListViewController: NSViewController, NSTableViewDelegate, NSTableV
          if let projectInfo = projectListDataController.projectInfoAtRow(row: row) {
             let vc = EditProjectViewController(projectInfo: projectInfo)
             
-            vc.chooseCompletion = { (projectName, projectPath) in
+            vc.chooseCompletion = { [unowned self] (projectName, projectPath) in
                 self.projectListDataController.editProject(at: row, projectName: projectName, projectPath: projectPath)
                 self.tableView.reloadData()
             }
@@ -108,6 +108,8 @@ class ProjectListViewController: NSViewController, NSTableViewDelegate, NSTableV
         if let projectInfo = projectListDataController.projectInfoAtRow(row: row) {
             // 进入详情页
             projectDetailWindowController = UIFactory.projectDetailWindowController()
+            projectDetailWindowController?.window?.delegate = self
+            
             projectDetailWindowController?.window?.title = projectInfo.projectName
             
             if let detailVC = projectDetailWindowController?.contentViewController as? ProjectDetailViewController {
@@ -116,6 +118,11 @@ class ProjectListViewController: NSViewController, NSTableViewDelegate, NSTableV
             
             projectDetailWindowController?.showWindow(self)
         }
+    }
+    
+    //MARK: NSWindowDelegate
+    func windowWillClose(_ notification: Notification) {
+        projectDetailWindowController = nil
     }
 }
 

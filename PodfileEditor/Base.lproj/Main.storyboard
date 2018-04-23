@@ -811,7 +811,7 @@
                                                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Default" id="01m-yk-EXj">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
                                                             </subviews>
@@ -990,11 +990,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="858" height="192"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" red="0.054119437020355973" green="0.14507089163356052" blue="0.23888964056434758" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <size key="minSize" width="858" height="192"/>
                                             <size key="maxSize" width="1160" height="10000000"/>
                                             <attributedString key="textStorage">
-                                                <fragment content="console output:">
+                                                <fragment content=" ">
                                                     <attributes>
                                                         <color key="NSColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <font key="NSFont" size="12" name="Menlo-Regular"/>

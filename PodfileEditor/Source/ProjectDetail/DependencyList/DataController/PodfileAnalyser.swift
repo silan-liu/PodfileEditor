@@ -48,87 +48,93 @@ class PodfileAnalyser {
     init(path: String) {
         podfilePath = path
     }
-
+    
+    deinit {
+        print("PodfileAnalyser deinit")
+    }
+    
     //MARK: Analyze
     func analyze(completion: (([DependencyInfo]) -> Void)?) {
-        print("begin analyze")
-        
-        do {
-            let content = try String(contentsOf: URL(fileURLWithPath: podfilePath))
+        DispatchQueue.global().async {
+            print("begin analyze")
             
-            if content.isEmpty {
-                return
-            }
-            
-            // 首先找出def function
-            findFunction(string: content)
-            
-            // 以行分隔
-            let lines = content.components(separatedBy: .newlines)
-            
-            contentArray = lines
-            
-            print("combined: \(lines.joined(separator: "\n"))")
-            
-            // 记录行数index
-            var index = -1
-            
-            // 定义的function的行数信息
-            var defIndexInfo = [String: [DefFunctionIndex: Int]]()
-            
-            for line in lines {
+            do {
+                let content = try String(contentsOf: URL(fileURLWithPath: self.podfilePath))
                 
-                index = index + 1
-
-                // 判断该行是否应该解析
-                if !lineShouldParse(index: index, line: line, defIndexInfo: defIndexInfo) {
-                    continue
+                if content.isEmpty {
+                    return
                 }
                 
-                // 解析依赖信息
-                if let info = extractDependencyInfo(line: line) {
-                    dependencyMap[index] = info
-                }
+                // 首先找出def function
+                self.findFunction(string: content)
                 
-                // 匹配到def，记录开始，结束行数
-                if let result = regexMatchGroup(pattern: "\\s*def\\s*(\\w+)(\\(\\))?", matchString: line) {
+                // 以行分隔
+                let lines = content.components(separatedBy: .newlines)
+                
+                self.contentArray = lines
+                
+                print("combined: \(lines.joined(separator: "\n"))")
+                
+                // 记录行数index
+                var index = -1
+                
+                // 定义的function的行数信息
+                var defIndexInfo = [String: [DefFunctionIndex: Int]]()
+                
+                for line in lines {
                     
-                    if let body = defContent[result] {
-                        
-                        let bodyLines = body.components(separatedBy: .newlines)
-
-                        // 用\n分隔，第一个和最后一个元素都是""，需去除(-2)，但因要加上end这一行(+1)，整体-1
-                        defIndexInfo[result] = [.Start: index, .End: (index + bodyLines.count - 1)]
+                    index = index + 1
+                    
+                    // 判断该行是否应该解析
+                    if !self.lineShouldParse(index: index, line: line, defIndexInfo: defIndexInfo) {
+                        continue
                     }
-                }
-                // 判断该行是否是函数调用,test()
-                else if let result = regexMatchGroup(pattern: "\\s*(\\w+)\\s*\\(?\\)?", matchString: line) {
                     
-                    if isCallFunction(functionName: result) {
-                        print("call function: \(result)")
+                    // 解析依赖信息
+                    if let info = self.extractDependencyInfo(line: line) {
+                        self.dependencyMap[index] = info
+                    }
+                    
+                    // 匹配到def，记录开始，结束行数
+                    if let result = self.regexMatchGroup(pattern: "\\s*def\\s*(\\w+)(\\(\\))?", matchString: line) {
                         
-                        if let functionIndexInfo = defIndexInfo[result] {
-                            // 解析出function定义的pod
-                            extractFunctionDependency(functionName: result, beginIndex: functionIndexInfo[.Start]!)
+                        if let body = self.defContent[result] {
+                            
+                            let bodyLines = body.components(separatedBy: .newlines)
+                            
+                            // 用\n分隔，第一个和最后一个元素都是""，需去除(-2)，但因要加上end这一行(+1)，整体-1
+                            defIndexInfo[result] = [.Start: index, .End: (index + bodyLines.count - 1)]
+                        }
+                    }
+                        // 判断该行是否是函数调用,test()
+                    else if let result = self.regexMatchGroup(pattern: "\\s*(\\w+)\\s*\\(?\\)?", matchString: line) {
+                        
+                        if self.isCallFunction(functionName: result) {
+                            print("call function: \(result)")
+                            
+                            if let functionIndexInfo = defIndexInfo[result] {
+                                // 解析出function定义的pod
+                                self.extractFunctionDependency(functionName: result, beginIndex: functionIndexInfo[.Start]!)
+                            }
                         }
                     }
                 }
+                
+                print("dependencyList count: \(self.dependencyMap.count)")
+                
+                for (key, value) in self.dependencyMap {
+                    print("line:\(key), info:\(value)")
+                }
+                
+                print("defIndexInfo:\(defIndexInfo)")
+                
+                if let completion = completion {
+                    completion(self.dependencyInfoList)
+                }
+                
+            } catch let error as NSError {
+                print("error:\(error)")
             }
-
-            print("dependencyList count: \(dependencyMap.count)")
-            
-            for (key, value) in dependencyMap {
-                print("line:\(key), info:\(value)")
-            }
-            
-            print("defIndexInfo:\(defIndexInfo)")
-            
-            if let completion = completion {
-                completion(dependencyInfoList)
-            }
-            
-        } catch let error as NSError {
-            print("error:\(error)")
         }
     }
     

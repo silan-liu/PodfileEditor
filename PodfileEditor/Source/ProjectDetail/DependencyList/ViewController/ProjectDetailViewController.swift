@@ -18,16 +18,20 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
         case ProjectActionCellView
     }
     
-    var installCommand: CommandExecutor = {
-        let execuator = CommandExecutor(with: ["install", "--verbose"])
-        return execuator
-    }()
-    
     var projectInfo: ProjectInfo? {
         didSet {
             parsePodfile()
         }
     }
+    
+    private lazy var installCommand: CommandExecutor? = {
+        if let projectPath = projectInfo?.projectPath {
+            let execuator = CommandExecutor(with: ["install", "--project-directory=\(projectPath)", "--verbose"])
+            return execuator
+        }
+        
+        return nil
+    }()
     
     private lazy var dataController: ProjectDetailDataController = ProjectDetailDataController(projectInfo: projectInfo)
     private lazy var projectDetailCellConfigurator = ProjectDetailCellConfigurator()
@@ -86,6 +90,39 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
     
     // MARK:NSTableViewDataSource
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        if let info = self.dataController.dependencyInfo(at: row) {
+            
+            var string = ""
+            
+            // 比较version和subspec的字符串长度，取较大的
+            if let versionInfo = info.versionInfo() {
+                if versionInfo.count > string.count {
+                    string = versionInfo
+                }
+            }
+            
+            if let subspecs = info.subspecs {
+                let subspecString = PodfileUtils.subspecsToString(subspecs: subspecs)
+                
+                if subspecString.count > string.count {
+                    string = subspecString
+                }
+            }
+
+            let column = tableView.tableColumns[1]
+
+            let margin: CGFloat = 10.0
+            let maxSize = NSSize(width: column.width - margin * 2, height: .greatestFiniteMagnitude)
+            
+            // 计算高度
+            let boundingBox = string.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [.font: NSFont.systemFont(ofSize: 13.0)], context: nil)
+            
+            let totalHeight = boundingBox.height + margin * 2
+            let height = totalHeight < 80 ? 80 : totalHeight
+            
+            return height
+        }
+        
         return 80
     }
     
@@ -98,17 +135,17 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
 ========================================
 \n
 """)
-        installCommand.run { (output) in
+        installCommand?.run(withHandler: { (output) in
             self.updateCommandOutput(output: output)
-        }
-        
-        self.updateCommandOutput(output: """
+        }, terminalHandler: {
+            self.updateCommandOutput(output: """
 \n
 ========================================
             script end
 ========================================
 \n
 """)
+        })
     }
     
     @IBAction func clearConsole(_ sender: Any) {
@@ -126,8 +163,10 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
     
     @IBAction func refreshDependency(_ sender: Any) {
         self.dataController.refresh { [unowned self] in
-            self.tableView.reloadData()
-            self.totalCountLabel.stringValue = "总共\(self.dataController.numberOfRows())项"
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.totalCountLabel.stringValue = "总共\(self.dataController.numberOfRows())项"
+            }
         }
     }
     
@@ -144,10 +183,14 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
     func parsePodfile() {
         if let projectInfo = projectInfo {
             print("projectInfo:\(projectInfo.projectPath)")
-            dataController.projectInfo = projectInfo
-            dataController.analyze { [unowned self] in
-                self.tableView.reloadData()
-                self.totalCountLabel.stringValue = "总共\(self.dataController.numberOfRows())项"
+            
+            self.dataController.projectInfo = projectInfo
+            self.dataController.analyze { [unowned self] in
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.totalCountLabel.stringValue = "总共\(self.dataController.numberOfRows())项"
+                }
             }
         }
     }

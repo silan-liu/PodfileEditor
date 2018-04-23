@@ -266,4 +266,41 @@ struct DependencyInfo: Equatable {
         
         return true
     }
+    
+    func versionInfo() -> String? {
+        switch type {
+        case SourceType.Version:
+            if let versionRequirement = self.versionRequirement, let version = self.version {
+                return versionRequirement.description() + " " + version
+            }
+            
+            return nil
+        case SourceType.Path:
+            if let path = self.path {
+                return ":path => " + path
+            }
+            
+            return nil
+            
+        case SourceType.Podspec:
+            
+            if let podspec = self.podspec {
+                return ":podspec => " + podspec
+            }
+            
+            return nil
+            
+        case SourceType.Git:
+            if let git = self.gitUrl {
+                var value = ":git => " + git
+                if let gitDescription = self.gitDescription, let gitType = self.gitType?.rawValue {
+                    value = value + "\n\n\(gitType) => " + gitDescription
+                }
+                
+                return value
+            }
+            
+            return nil
+        }
+    }
 }

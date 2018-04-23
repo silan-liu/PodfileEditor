@@ -19,7 +19,7 @@ class PodfileUtils {
             string.append(subspecs[index])
             
             if index != count - 1 {
-                string.append(",")
+                string.append(", ")
             }
             
             index = index + 1
