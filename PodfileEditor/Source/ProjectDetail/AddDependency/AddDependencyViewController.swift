@@ -39,7 +39,7 @@ class AddDependencyViewController: NSViewController {
         chooseType(typePopupButton)
     }
     
-    // 显示版本号限制
+    /// 显示版本号限制
     func showVersionRequirement(show: Bool) {
         branchLabel.isHidden = show
         branchTextField.isHidden = show
@@ -48,20 +48,21 @@ class AddDependencyViewController: NSViewController {
         versionRequirementPopupButton.isHidden = !show
     }
     
-    // 显示git type相关ui
+    /// 显示git type相关ui
     func showGitTypeUI(show: Bool) {
         gitTypeLabel.isHidden = !show
         gitTypePopUpButton.isHidden = !show
     }
     
-    // confirm消失之前操作
+    /// confirm消失之前操作
     func beforeDismissAction(dep: DependencyInfo) {
         if let completion = completion {
             completion(dep)
         }
     }
     
-    //MARK: Action
+    
+    // MARK: Action
     @IBAction func preview(_ sender: Any) {
         if let info = generateDependencyInfo() {
             
@@ -146,6 +147,7 @@ class AddDependencyViewController: NSViewController {
         self.dismiss(nil)
     }
     
+    /// 检查输入
     func checkInput() -> (Bool, String) {
         
         if nameTextField.stringValue.isEmpty {
@@ -162,6 +164,10 @@ class AddDependencyViewController: NSViewController {
         return (true, "")
     }
     
+    
+    /// 生成依赖结构
+    ///
+    /// - Returns: 依赖信息
     func generateDependencyInfo() -> DependencyInfo? {
         
         let name = nameTextField.stringValue
@@ -200,6 +206,11 @@ class AddDependencyViewController: NSViewController {
         return dep
     }
     
+    
+    /// 将subspec string转换成数组
+    ///
+    /// - Parameter string: "a,b,c"
+    /// - Returns: ["a","b","c"]
     func subspecs(string: String) -> [String]? {
         if string.isEmpty {
             return nil

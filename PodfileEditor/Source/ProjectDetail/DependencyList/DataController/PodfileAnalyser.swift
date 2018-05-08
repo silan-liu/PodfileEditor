@@ -73,20 +73,18 @@ class PodfileAnalyser {
                 
                 self.contentArray = lines
                 
-                print("combined: \(lines.joined(separator: "\n"))")
-                
                 // 记录行数index
-                var index = -1
+                var index = 0
                 
                 // 定义的function的行数信息
                 var defIndexInfo = [String: [DefFunctionIndex: Int]]()
                 
                 for line in lines {
                     
-                    index = index + 1
-                    
                     // 判断该行是否应该解析
                     if !self.lineShouldParse(index: index, line: line, defIndexInfo: defIndexInfo) {
+                        index += 1
+
                         continue
                     }
                     
@@ -118,6 +116,8 @@ class PodfileAnalyser {
                             }
                         }
                     }
+                    
+                    index += 1
                 }
                 
                 print("dependencyList count: \(self.dependencyMap.count)")
@@ -167,6 +167,9 @@ class PodfileAnalyser {
                 // 真正移除
                 contentArray.remove(at: line)
                 dependencyMap.removeValue(forKey: line)
+                
+                // map中的line更新
+                refreshDependencyMap(at: line)
                 
                 print("delete sucess")
 
@@ -227,7 +230,7 @@ class PodfileAnalyser {
     private func saveFile(array: [String]) throws {
         let content = array.joined(separator: "\n")
         
-        let url = URL(fileURLWithPath: "/Users/liusilan/Desktop/1")
+        let url = URL(fileURLWithPath: podfilePath)
 
         try content.write(to: url, atomically: true, encoding: .utf8)
     }
@@ -308,10 +311,22 @@ class PodfileAnalyser {
         if let body = defContent[functionName] {
             
             // 以行分隔
-            let lines = body.components(separatedBy: .newlines)
+            var lines = body.components(separatedBy: .newlines)
             var index = beginIndex + 1
             
+            // 去除头尾\n
+            lines.removeFirst()
+            lines.removeLast()
+            
             for line in lines {
+                
+                // 过滤空行，注释行
+                let trimmed = line.replacingOccurrences(of: " ", with: "")
+                
+                if trimmed.isEmpty || trimmed.hasPrefix("#") {
+                    index = index + 1
+                    continue
+                }
                 
                 if let dependencyInfo = extractDependencyInfo(line: line) {
                     dependencyMap[index] = dependencyInfo
@@ -436,6 +451,20 @@ class PodfileAnalyser {
         }
         
         return nil
+    }
+    
+    /// 更新map中的line index
+    private func refreshDependencyMap(at line: Int) {
+        let indexList = dependencyIndexList
+        
+        for index in indexList {
+            if index > line {
+                // index - 1
+                let dep = dependencyMap[index]
+                dependencyMap[index - 1] = dep
+                dependencyMap.removeValue(forKey: index)
+            }
+        }
     }
     
     //MARK:Helper

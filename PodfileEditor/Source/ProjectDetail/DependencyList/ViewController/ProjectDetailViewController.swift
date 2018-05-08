@@ -165,7 +165,7 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
         self.dataController.refresh { [unowned self] in
             DispatchQueue.main.async {
                 self.tableView.reloadData()
-                self.totalCountLabel.stringValue = "总共\(self.dataController.numberOfRows())项"
+                self.totalCountLabel.stringValue = "共\(self.dataController.numberOfRows())项"
             }
         }
     }
@@ -202,7 +202,7 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
-                    self.totalCountLabel.stringValue = "总共\(self.dataController.numberOfRows())项"
+                    self.totalCountLabel.stringValue = "共\(self.dataController.numberOfRows())项"
                 }
             }
         }
@@ -225,6 +225,8 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
     func deleteDependency(at row: Int) {
         dataController.deleteDependency(at: row)
         tableView.reloadData()
+        
+        self.totalCountLabel.stringValue = "共\(self.dataController.numberOfRows())项"
     }
     
     // 添加依赖
