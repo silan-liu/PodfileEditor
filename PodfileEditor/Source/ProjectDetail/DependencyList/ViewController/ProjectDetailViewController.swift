@@ -183,8 +183,8 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
         }
     }
     
-    //MARK：func
-    // 更新命令输出
+    // MARK：func
+    /// 更新命令输出
     func updateCommandOutput(output: String) {
         DispatchQueue.main.async {
             self.textView.string = self.textView.string.appending(output)
@@ -192,7 +192,7 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
         }
     }
     
-    // 解析podfile
+    /// 解析podfile
     func parsePodfile() {
         if let projectInfo = projectInfo {
             print("projectInfo:\(projectInfo.projectPath)")
@@ -202,13 +202,13 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
-                    self.totalCountLabel.stringValue = "共\(self.dataController.numberOfRows())项"
+                    self.updateTotalCount()
                 }
             }
         }
     }
     
-    // 修改依赖
+    /// 修改依赖
     func editDependency(at row: Int) {
         if let dependency = dataController.dependencyInfo(at: row) {
             let vc = EditDependencyViewController(dep: dependency)
@@ -221,18 +221,26 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
         }
     }
     
-    // 删除依赖
+    /// 删除依赖
     func deleteDependency(at row: Int) {
         dataController.deleteDependency(at: row)
         tableView.reloadData()
         
-        self.totalCountLabel.stringValue = "共\(self.dataController.numberOfRows())项"
+        updateTotalCount()
     }
     
-    // 添加依赖
+    /// 添加依赖
     func addDependency(dep: DependencyInfo) {
-        dataController.addDependency(dep: dep)
-        tableView.reloadData()
+        if dataController.addDependency(dep: dep) == true {
+            tableView.reloadData()
+            
+            updateTotalCount()
+        }
+    }
+    
+    /// 更新pod数目
+    private func updateTotalCount() {
+        self.totalCountLabel.stringValue = "共\(self.dataController.numberOfRows())项"
     }
     
     deinit {

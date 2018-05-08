@@ -36,8 +36,14 @@ class ProjectDetailDataController: NSObject {
         self.projectInfo = projectInfo
     }
     
-    func addDependency(dep: DependencyInfo) {
-        dependencyList?.append(dep)
+    func addDependency(dep: DependencyInfo) -> Bool {
+        if podfileAnalyser?.addDependency(dep) == true {
+            dependencyList?.insert(dep, at: 0)
+            
+            return true
+        }
+        
+        return false
     }
     
     func deleteDependency(at row: Int) {

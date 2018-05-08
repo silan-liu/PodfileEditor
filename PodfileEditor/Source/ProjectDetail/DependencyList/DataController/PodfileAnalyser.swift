@@ -12,6 +12,8 @@ class PodfileAnalyser {
     // podfile路径
     var podfilePath: String
 
+    private var firstTargetLine: Int = -1
+    
     // podfile content array
     private var contentArray = [String]()
     
@@ -104,7 +106,15 @@ class PodfileAnalyser {
                             defIndexInfo[result] = [.Start: index, .End: (index + bodyLines.count - 1)]
                         }
                     }
-                        // 判断该行是否是函数调用,test()
+                    // 判断是否target
+                    else if let _ = self.regexMatchGroup(pattern: "\\s*target\\s*['\"]([\\w]+)['\"]", matchString: line) {
+                        if self.firstTargetLine == -1 {
+                            self.firstTargetLine = index
+                            
+                            print("firstTargetLine: \(self.firstTargetLine)")
+                        }
+                    }
+                    // 判断该行是否是函数调用,test()
                     else if let result = self.regexMatchGroup(pattern: "\\s*(\\w+)\\s*\\(?\\)?", matchString: line) {
                         
                         if self.isCallFunction(functionName: result) {
@@ -146,12 +156,47 @@ class PodfileAnalyser {
         analyze(completion: completion)
     }
     
-    // podFile中的依赖项
+    /// podFile中的依赖项
     func dependencyList() -> [DependencyInfo] {
         return dependencyInfoList
     }
     
-    // 删除依赖
+    /// 添加依赖
+    func addDependency(_ dep: DependencyInfo) -> Bool {
+        // 添加到第一个target下
+        let depDesc = "\t" + dep.toString()
+        guard !depDesc.isEmpty, firstTargetLine != -1 else {
+            return false
+        }
+        
+        var copyContentArray = contentArray
+
+        let insertIndex = firstTargetLine + 1
+        copyContentArray.insert(depDesc, at: insertIndex)
+        
+        // 保存podfile
+        do {
+            try saveFile(array: copyContentArray)
+            
+            // 真正移除
+            contentArray.insert(depDesc, at: insertIndex)
+            
+            // map中的line更新
+            refreshDependencyMapWhenAdd(at: insertIndex)
+
+            // 最后插入
+            dependencyMap[insertIndex] = dep
+
+            print("add sucess")
+            
+            return true
+        } catch let error as NSError {
+            print("saveFile Error:\(error)")
+            return false
+        }
+    }
+    
+    /// 删除依赖
     func deleteDependency(at row: Int) {
         let line = lineForRow(at: row)
         
@@ -169,7 +214,7 @@ class PodfileAnalyser {
                 dependencyMap.removeValue(forKey: line)
                 
                 // map中的line更新
-                refreshDependencyMap(at: line)
+                refreshDependencyMapWhenDelete(at: line)
                 
                 print("delete sucess")
 
@@ -454,7 +499,7 @@ class PodfileAnalyser {
     }
     
     /// 更新map中的line index
-    private func refreshDependencyMap(at line: Int) {
+    private func refreshDependencyMapWhenDelete(at line: Int) {
         let indexList = dependencyIndexList
         
         for index in indexList {
@@ -462,6 +507,20 @@ class PodfileAnalyser {
                 // index - 1
                 let dep = dependencyMap[index]
                 dependencyMap[index - 1] = dep
+                dependencyMap.removeValue(forKey: index)
+            }
+        }
+    }
+    
+    /// 更新map中的line index
+    private func refreshDependencyMapWhenAdd(at line: Int) {
+        let indexList = dependencyIndexList
+        
+        for index in indexList.reversed() {
+            if index >= line {
+                // index - 1
+                let dep = dependencyMap[index]
+                dependencyMap[index + 1] = dep
                 dependencyMap.removeValue(forKey: index)
             }
         }

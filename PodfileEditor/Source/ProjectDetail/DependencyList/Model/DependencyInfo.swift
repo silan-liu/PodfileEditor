@@ -172,12 +172,17 @@ struct DependencyInfo: Equatable {
             string = string + "'\(name)'"
             
             if type == .Version {
-                if let ver = version, let requirement = versionRequirement {
-                    let requirementDesc = requirement.description()
-                    if requirementDesc.isEmpty {
-                        string = string + ", '\(ver)'"
+                if let ver = version, !ver.isEmpty {
+                    if let requirement = versionRequirement {
+                        // 转换成字符串
+                        let requirementDesc = requirement.description()
+                        if requirementDesc.isEmpty {
+                            string = string + ", '\(ver)'"
+                        } else {
+                            string = string + ", '\(requirement.description()) \(ver)'"
+                        }
                     } else {
-                        string = string + ", '\(requirement.description()) \(ver)'"
+                        string = string + ", '\(ver)'"
                     }
                 }
             } else if type == .Git {
@@ -191,11 +196,11 @@ struct DependencyInfo: Equatable {
             
             } else if type == .Path {
                 if let path = path {
-                    string = string + ", :path => \(path)"
+                    string = string + ", :path => '\(path)'"
                 }
             } else if type == .Podspec {
                 if let podspec = podspec {
-                    string = string + ", :podspec => \(podspec)"
+                    string = string + ", :podspec => '\(podspec)'"
                 }
             }
             

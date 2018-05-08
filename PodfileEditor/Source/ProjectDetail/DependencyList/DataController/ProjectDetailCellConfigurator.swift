@@ -45,8 +45,12 @@ class ProjectDetailCellConfigurator: NSObject {
     func versionInfo(info: DependencyInfo) -> String? {
         switch info.type {
         case SourceType.Version:
-            if let versionRequirement = info.versionRequirement, let version = info.version {
-                return versionRequirement.description() + " " + version
+            if let version = info.version, !version.isEmpty {
+                if let versionRequirement = info.versionRequirement {
+                    return versionRequirement.description() + " " + version
+                } else {
+                    return version
+                }
             }
             
             return nil
@@ -68,8 +72,8 @@ class ProjectDetailCellConfigurator: NSObject {
         case SourceType.Git:
             if let git = info.gitUrl {
                 var value = ":git => " + git
-                if let gitDescription = info.gitDescription, let gitType = info.gitType?.rawValue {
-                    value = value + "\n\n\(gitType) => " + gitDescription
+                if let gitDescription = info.gitDescription, let gitType = info.gitType?.rawValue, !gitDescription.isEmpty {
+                    value = value + "\n\n:\(gitType) => " + gitDescription
                 }
 
                 return value

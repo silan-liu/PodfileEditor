@@ -21,7 +21,6 @@ class AddDependencyViewController: NSViewController {
     @IBOutlet weak var configPopUpButton: NSPopUpButton!
     @IBOutlet weak var versionRequirementPopupButton: NSPopUpButton!
     @IBOutlet weak var errorLabel: NSTextField!
-    @IBOutlet weak var gitTypeLabel: NSTextField!
     @IBOutlet weak var gitTypePopUpButton: NSPopUpButton!
     
     var completion: ((DependencyInfo) -> Void)? = nil
@@ -50,7 +49,6 @@ class AddDependencyViewController: NSViewController {
     
     /// 显示git type相关ui
     func showGitTypeUI(show: Bool) {
-        gitTypeLabel.isHidden = !show
         gitTypePopUpButton.isHidden = !show
     }
     
@@ -89,16 +87,20 @@ class AddDependencyViewController: NSViewController {
             branchTextField.isEnabled = true
             showVersionRequirement(show: false)
             showGitTypeUI(show: true)
-            
+            branchLabel.stringValue = "branch/commit/tag (optional)"
+
         } else if (tag == 2) {
             urlLabel.stringValue = "path"
 
             // textField不能输入
+            branchLabel.stringValue = "not need"
             branchTextField.isEnabled = false
             showVersionRequirement(show: false)
             showGitTypeUI(show: false)
 
         } else if (tag == 0) {
+            
+            branchLabel.stringValue = "not need"
             urlLabel.stringValue = "version (optional)"
             showVersionRequirement(show: true)
             showGitTypeUI(show: false)
@@ -110,6 +112,7 @@ class AddDependencyViewController: NSViewController {
             branchTextField.isEnabled = false
             showVersionRequirement(show: false)
             showGitTypeUI(show: false)
+            branchLabel.stringValue = "not need"
         }
     }
     
