@@ -26,7 +26,7 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
     
     private lazy var installCommand: CommandExecutor? = {
         if let projectPath = projectInfo?.projectPath {
-            let execuator = CommandExecutor(with: ["install", "--project-directory=\(projectPath)", "--verbose"])
+            let execuator = CommandExecutor(with: ["install", "--project-directory=\(projectPath)"])
             return execuator
         }
         
@@ -167,6 +167,19 @@ class ProjectDetailViewController: NSViewController, NSTableViewDelegate, NSTabl
                 self.tableView.reloadData()
                 self.totalCountLabel.stringValue = "总共\(self.dataController.numberOfRows())项"
             }
+        }
+    }
+    
+    @IBAction func showInFinder(_ sender: Any) {
+        if let projectPath = projectInfo?.projectPath, FileManager.default.fileExists(atPath: projectPath) {
+            NSWorkspace.shared.open(URL(fileURLWithPath: projectPath))
+        } else {
+            let alert = NSAlert()
+            alert.messageText = "project path is not valid"
+            
+            alert.alertStyle = .informational
+            alert.addButton(withTitle: "OK")
+            alert.beginSheetModal(for: view.window!, completionHandler: nil)
         }
     }
     
